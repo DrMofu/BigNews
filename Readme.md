@@ -1,7 +1,7 @@
-#Big News 新闻管理网站系统
-为用户提供实时热点新闻
+# Big News 新闻管理网站系统
+- 为用户提供实时热点新闻
 
-采用python语言，flask框架
+- 采用python语言，flask框架
 
 index.py 为主程序
 config.py 为配置文件
