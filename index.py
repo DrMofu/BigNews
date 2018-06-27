@@ -1,4 +1,4 @@
-#encodig:utf-8
+# -*- coding: UTF-8 -*-
 
 from flask import Flask,request,session,redirect,url_for,render_template
 import config as config
