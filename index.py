@@ -8,7 +8,7 @@ app.config.from_object(config)
 
 @app.route('/')
 def index():
-	return 'This is index'
+	return u'This is index'
 
 if __name__ == '__main__':
 	app.run()
