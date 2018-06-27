@@ -7,7 +7,7 @@ app.config.from_object(config)
 
 @app.route('/')
 def index():
-	return '这是首页'
+	return 'This is index'
 
 if __name__ == '__main__':
 	app.run()
