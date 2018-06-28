@@ -1,10 +1,14 @@
 # -*- coding: UTF-8 -*-
 
 from flask import Flask,request,session,redirect,url_for,render_template,g
+from flask_sqlalchemy import SQLAlchemy
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
+db = SQLAlchemy(app)
+
+db.create_all()
 
 @app.route('/')
 def index():
