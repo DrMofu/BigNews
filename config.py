@@ -9,7 +9,7 @@ PERMANENT_SESSION_LIFETIME = timedelta(days=5)
 
 # 数据库配置 这里使用MYSQL
 DIALECT = 'mysql'
-DRIVER = 'mysqldb'
+DRIVER = 'pymysql'
 USERNAME = 'root' # 用户名、密码根据各位本地mysql的设置而定
 PASSWORD = 'root'
 HOST = '127.0.0.1'
