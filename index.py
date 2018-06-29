@@ -1,18 +1,16 @@
 # -*- coding: UTF-8 -*-
 
 from flask import Flask,request,session,redirect,url_for,render_template,g
-from flask_sqlalchemy import SQLAlchemy
-import database
+from models import *
+from exts import db
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
-db = SQLAlchemy(app)
+db.init_app(app)
 
-# 建立数据库
-database.createDB(db)
+# 对数据库建立，存储等操作在manage.py中进行
 
-db.create_all()
 
 @app.route('/')
 def index():
