@@ -21,6 +21,9 @@ class News(db.Model):
 	Source = db.Column(db.String(16))
 	Author = db.Column(db.String(16))
 	Likes = db.Column(db.Integer,nullable=False)
+	URL = db.Column(db.String(255))
+	PicURL = db.Column(db.String(255))
+	WaitForCheck = db.Column(db.Integer,nullable=False)
 	Value = db.Column(db.Integer,nullable=False)
 	# 可以使用 Comments(所有留言)，Likes(所有点的赞的id）
 
@@ -43,6 +46,7 @@ class Comments(db.Model):
 	news = db.relationship('News',backref=db.backref('Comments'))
 	touser = db.relationship('User',backref=db.backref('Tocomments')) 
 
+'''
 # 待管理员审核文章
 class WaitNews(db.Model):
 	__tablename__ = 'WaitNews'
@@ -52,6 +56,7 @@ class WaitNews(db.Model):
 	Article = db.Column(db.Text,nullable=False)
 	Date = db.Column(db.Text)
 	Author = db.Column(db.String(16))
+'''
 
 # 点赞记录
 class Likes(db.Model):
