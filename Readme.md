@@ -27,7 +27,7 @@ python manage.py db upgrade
 
 3. 创建数据库
 ```
-python database.py
+python manage.py init_db
 ```
 
 ## 使用
@@ -38,7 +38,8 @@ python index.py
 ## 文件说明
 - index.py                  主程序
 - config.py                 配置文件
-- database.py               数据库创建文件
+- manage.py                 存放各类操作指令，如数据库创建
+- models.py                  提供ORM方法的对数据库操作
 - requirements.txt          python包说明
 
 - static                    中存放css，js，img等内容
