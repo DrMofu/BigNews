@@ -1,13 +1,13 @@
 # -*- coding: UTF-8 -*-
 
 from flask import Flask,request,session,redirect,url_for,render_template,g
-from models import *
-from exts import db
+#from models import *
+#from exts import db
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
-db.init_app(app)
+#db.init_app(app)
 
 # 对数据库建立，存储等操作在manage.py中进行
 

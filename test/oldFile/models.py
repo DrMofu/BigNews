@@ -1,6 +1,13 @@
 # -*- coding: UTF-8 -*-
 from exts import db
 
+
+class Test(db.Model):
+	__tablename__ = 'Test'
+	UID = db.Column(db.Integer,primary_key=True,autoincrement=True)
+	UserName = db.Column(db.String(16),nullable=False)
+	Password = db.Column(db.String(16),nullable=False)
+
 class User(db.Model):
 	__tablename__ = 'User'
 	UID = db.Column(db.Integer,primary_key=True,autoincrement=True)
@@ -9,6 +16,7 @@ class User(db.Model):
 	Password = db.Column(db.String(16),nullable=False)
 	SignTime = db.Column(db.String(32),nullable=False)
 	# 可以使用 Comments(所有留言)，Tocomments（所有被回复），Likes(所有点的赞的id）
+
 
 # 新闻数据表集
 class News(db.Model):

@@ -12,7 +12,7 @@
 
 - 可以直接使用 **pip install -r requirements.txt** 安装环境
 
-3. 安装mysql 
+<!-- 3. 安装mysql 
 
 - [mysql windows版](https://dev.mysql.com/downloads/installer/)
 
@@ -23,6 +23,12 @@ python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
 ```
+ -->
+
+3. 创建数据库
+```
+python database.py
+```
 
 ## 使用
 ```
@@ -30,15 +36,14 @@ python index.py
 ```
 
 ## 文件说明
-- index.py                  为主程序
-- config.py                 为配置文件
-- models.py                 管理数据库数据创建
-- index.wsgi                与新浪云服务器有关，忽略即可
-- exts.py
+- index.py                  主程序
+- config.py                 配置文件
+- database.py               数据库创建文件
 - requirements.txt          python包说明
+
 - static                    中存放css，js，img等内容
 - templates                 存放html
-
+- crawler                   存放爬虫文件
 - test                      为测试文件夹，所有成员可在其中创建一个以自己名称命名的文件夹，并在其中测试各个功能
 
 
@@ -58,3 +63,7 @@ python index.py
 pip install -r requirements.txt
 ```
 - 完善数据库
+
+2018.6.30
+- 更换了数据库，改为sqlite
+- 添加部分爬虫文件
