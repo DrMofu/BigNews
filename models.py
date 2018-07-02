@@ -47,12 +47,12 @@ class Comments(db.Model):
 	touser = db.Column(db.Integer,db.ForeignKey('user.uid'))
 
 	# 创建类之间的关系
-	user_ = db.relationship('User',backref=db.backref('comments')) # 系统自动去User类找表名为user的UID
+	# user_ = db.relationship('User',backref=db.backref('comments')) # 系统自动去User类找表名为user的UID
 	# 调用user，会找到一个User类
 	# backref 反向引用 使用User.comments（直接是User类），找到所有与一个User类关联的Comments类
 	# 两个类相互关联，只用创一个，另一个不用创建
-	news_ = db.relationship('News',backref=db.backref('comments'))
-	touser_ = db.relationship('User',backref=db.backref('tocomments')) 
+	# news_ = db.relationship('News',backref=db.backref('comments'))
+	# touser_ = db.relationship('User',backref=db.backref('tocomments')) 
 
 '''
 # 待管理员审核文章
@@ -73,5 +73,5 @@ class Likes(db.Model):
 	uid = db.Column(db.Integer,db.ForeignKey('user.uid'),nullable=False)
 	pid = db.Column(db.Integer,db.ForeignKey('news.pid'),nullable=False)
 
-	user = db.relationship('User',backref=db.backref('likes'))
-	news = db.relationship('News',backref=db.backref('likes'))
+	# user = db.relationship('User',backref=db.backref('likes'))
+	# news = db.relationship('News',backref=db.backref('likes'))

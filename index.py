@@ -3,6 +3,7 @@
 from flask import Flask,request,session,redirect,url_for,render_template,g
 from models import *
 from exts import db
+from crawler import *
 import config
 
 app = Flask(__name__)
@@ -47,7 +48,14 @@ def user():
 def user_info(userid):
 	return userid
 
-
+# 爬虫模块
+@app.route('/crawler/')
+def crawler():
+	return_list = crawler_36kr()
+	for news in return_list:
+		db.session.add(news)
+		db.session.commit()
+	return 'finished'
 
 # news 具体内容页
 @app.route('/news/<newsId>')
