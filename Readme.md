@@ -12,7 +12,7 @@
 
 - 可以直接使用 **pip install -r requirements.txt** 安装环境
 
-<!-- 3. 安装mysql 
+3. 安装mysql 
 
 - [mysql windows版](https://dev.mysql.com/downloads/installer/)
 
@@ -23,13 +23,13 @@ python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
 ```
- -->
 
-3. 创建数据库
+
+<!-- 3. 创建数据库
 ```
 python manage.py init_db
 ```
-
+ -->
 ## 使用
 ```
 python index.py
@@ -68,3 +68,6 @@ pip install -r requirements.txt
 2018.6.30
 - 更换了数据库，改为sqlite
 - 添加部分爬虫文件
+
+2018.7.2
+- 换回使用mysql数据库，找到之前出错问题。数据库搭建出ORM中类首字母大写，其余内容均小写
