@@ -21,7 +21,8 @@ def crawler_36kr():
 			print('数据已经存在 %s' % title)
 			continue
 		else:
-			time = item['created_at']
+			time = item['published_at']
+			print(time)
 			desc = item['description']
 			url = item['news_url']
 			if re.search('）$',desc):
@@ -30,8 +31,8 @@ def crawler_36kr():
 			else:
 				source = '36氪'
 				desc = item['description']
-				news = News(title=title,article=desc,date=time,\
-				type='科技',source='36Kr',author='36Kr',likes=0,\
-				url=url,waitforcheck=1,value=0)	
-				return_list.append(news)
+		news = News(title=title,article=desc,time=time,
+				type='科技',source=source,author=source,likes=0,
+				url=url,waitforcheck=1,value=0)					
+		return_list.append(news)
 	return return_list

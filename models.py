@@ -1,11 +1,6 @@
 # -*- coding: UTF-8 -*-
 from exts import db
-
-class Test(db.Model):
-	__tablename__ = 'test'
-	uid = db.Column(db.Integer,primary_key=True,autoincrement=True)
-	username = db.Column(db.String(16),nullable=False)
-	password = db.Column(db.String(16),nullable=False)
+from datetime import datetime
 
 class User(db.Model):
 	__tablename__ = 'user'
@@ -13,7 +8,7 @@ class User(db.Model):
 	type = db.Column(db.Integer,nullable=False)
 	username = db.Column(db.String(16),nullable=False)
 	password = db.Column(db.String(16),nullable=False)
-	signtime = db.Column(db.String(32),nullable=False)
+	signtime = db.Column(db.DateTime,nullable=False,default=datetime.now)
 	describe = db.Column(db.String(32))
 	# 可以使用 Comments(所有留言)，Tocomments（所有被回复），Likes(所有点的赞的id）
 
@@ -24,15 +19,18 @@ class News(db.Model):
 	pid = db.Column(db.Integer,primary_key=True,autoincrement=True)
 	title = db.Column(db.String(255),nullable=False)
 	article = db.Column(db.Text,nullable=False)
-	date = db.Column(db.Text)
+	time = db.Column(db.DateTime,default=datetime.now)
 	type = db.Column(db.String(16),nullable=False)
 	source = db.Column(db.String(16))
 	author = db.Column(db.String(16))
-	likes = db.Column(db.Integer,nullable=False)
+	likes = db.Column(db.Integer,nullable=False,default=0)
 	url = db.Column(db.String(255))
 	picurl = db.Column(db.String(255))
-	waitforcheck = db.Column(db.Integer,nullable=False)
-	value = db.Column(db.Integer,nullable=False)
+	waitforcheck = db.Column(db.Integer,nullable=False)            # 0需要审核 1爬虫获取 2管理员审核
+	value = db.Column(db.Integer,nullable=False,default=0)
+
+	author_id = db.Column(db.Integer,db.ForeignKey('user.uid'))
+	author_user = db.relationship('User',backref=db.backref('news'))
 	# 可以使用 Comments(所有留言)，Likes(所有点的赞的id）
 
 # 用户留言数据
@@ -43,7 +41,7 @@ class Comments(db.Model):
 	newsid = db.Column(db.Integer,db.ForeignKey('news.pid'),nullable=False) # 是table名（和mysql语句有关），不是类名
 	userid = db.Column(db.Integer,db.ForeignKey('user.uid'),nullable=False)
 	comment = db.Column(db.String(255),nullable=False)
-	time = db.Column(db.String(32),nullable=False)
+	time = db.Column(db.DateTime,nullable=False)
 	touser = db.Column(db.Integer,db.ForeignKey('user.uid'))
 
 	# 创建类之间的关系
