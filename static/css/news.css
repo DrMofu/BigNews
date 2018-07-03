@@ -187,7 +187,7 @@ p{
     float: left;
 }
 
-/*�������ƶ���ʱ*/
+/*µ±²»ÊÇÒÆ¶¯¶ËÊ±*/
 @media only screen and (min-width: 768px) {
     #author_name{
         font-weight: bold;
@@ -214,4 +214,38 @@ p{
 
 @media only screen and (min-width: 992px) {
 
+}
+
+
+/*暂时评论页面css*/
+.news-info{
+    text-align: center;
+    margin-top: 20px;
+}
+.comment-list{
+    padding-left: 0;
+}
+.comment-list li{
+    list-style: none;
+    border-bottom: 1px solid blue;
+    padding-top: 10px;
+}
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.user-info{
+    font-size: 16px;
+    color: #9b9b9b;
+    line-height: 40px;
+}
+.user-info .username{
+    margin-left: 20px;
+}
+.user-info .create-time{
+    float: right;
+}
+.comment-content{
+    margin-left: 60px;
 }

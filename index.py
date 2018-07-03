@@ -20,7 +20,11 @@ def test():
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	content = {
+		'news_' : News.query.order_by('-time').limit(10).all()
+	}
+
+	return render_template('index.html',**content)
 
 # user模块
 '''
@@ -113,6 +117,32 @@ def release():
 		db.session.commit()
 		return redirect(url_for('index'))
 
+
+
+# news 具体内容页
+@app.route('/news/<newsId>')
+def newsPage(newsId):
+	news = News.query.filter(News.pid == newsId).first()
+	return render_template('news.html',news=news)
+
+# add_comment 添加评论
+@app.route('/add_comment/', methods=['POST'])
+@login_required
+def add_comment():
+	content = request.form.get('push_comment')
+	news_id = request.form.get('news_id')
+	username = g.username
+	user = User.query.filter(User.username == username).first()
+	news = News.query.filter(News.pid == news_id).first()
+	new_comment = Comments(newsid=news_id,userid=user.uid,comment=content) 
+	new_comment.user = user
+	new_comment.news = news
+
+	db.session.add(new_comment)
+	db.session.commit()
+	return redirect(url_for('newsPage',newsId = news_id))
+
+
 # 爬虫模块
 @app.route('/crawler/')
 def crawler():
@@ -121,13 +151,6 @@ def crawler():
 		db.session.add(news)
 		db.session.commit()
 	return 'finished'
-
-# news 具体内容页
-@app.route('/news/<newsId>')
-def newsPage(newsId):
-
-	return render_template('news.html')
-
 
 # 钩子函数
 # before_request 在每次request前进行处理

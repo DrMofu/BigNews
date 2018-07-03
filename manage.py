@@ -19,5 +19,17 @@ manager.add_command('db',MigrateCommand)
 def test():
 	print ("server start")
 
+
+# 默认创建一个特定用户
+def create_user():
+	return 0
+	
+# 初始化几个系统用户
+def init_user():
+	pass
+
+
 if __name__ == '__main__':
 	manager.run()
+
+

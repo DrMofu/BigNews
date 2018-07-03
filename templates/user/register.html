@@ -2,29 +2,25 @@
 
 {% block title %}注册{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link href="{{ url_for('static',filename='css/login_sign.css')}}" rel="stylesheet">
+{% endblock %}
 
 {% block main %}
-	<form action="{{ url_for('register') }}" method="post">
-		<table>
-			<tbody>
-				<tr>
-					<td>用户名：</td>
-					<td><input type="text" name="username" placeholder="请输入用户名"></td>
-				</tr>
-				<tr>
-					<td>密码：</td>
-					<td><input type="password" name="password1"></td>
-				</tr>
-				<tr>
-					<td>确认密码：</td>
-					<td><input type="password" name="password2"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="注册"></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+<body id="body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 log-container">
+                <form action="{{ url_for('register') }}" method="post">
+                    <h2 class="title">注册</h2>
+                    <input type="text" class="form-control" placeholder="用户名(只能包含汉字和字母)"  name="username">
+                    <!-- <input type="password" class="form-control" placeholder="邮箱"> -->
+                    <input type="password" class="form-control" placeholder="密码(最少六位,只能包含字母和数字)" name="password1">
+                    <input type="password" class="form-control" placeholder="确认密码" name="password2">
+                    <button class="btn btn-default btn-block" type="submit" value="注册">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
 {% endblock %}

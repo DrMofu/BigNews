@@ -2,25 +2,31 @@
 
 {% block title %}登录{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link href="{{ url_for('static',filename='css/login_sign.css')}}" rel="stylesheet">
+{% endblock %}
 
-{% block main %}
-	<form action="{{ url_for('login') }}" method="post">
-		<table>
-			<tbody>
-				<tr>
-					<td>用户名：</td>
-					<td><input type="text" name="username" placeholder="请输入用户名"></td>
-				</tr>
-				<tr>
-					<td>密码：</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="登录"></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+{% block main %}    
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 log-container">
+                <form  action="{{ url_for('login') }}" method="post">
+                    <h2 class="title">登录</h2>
+
+                    <input type="text" class="form-control" placeholder="用户名/邮箱" name="username">
+                    <div class="input-group" style="margin-top:20px;">
+                        <input id="with-button" type="password" class="form-control" placeholder="密码"  name="password">
+                        <span class="input-group-addon">
+                            <button id="addon-btn" class="btn" type="button">
+                                <span id="addon-pic" class="glyphicon glyphicon-eye-open" alt="显示密码">
+                            </button>
+                        </span>
+                    </div>
+                    <button class="btn btn-link" style="text-align:right;" type="button">忘记密码?</button>
+                    <br>
+                    <button class="btn btn-default btn-block" type="submit">登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

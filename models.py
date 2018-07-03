@@ -37,21 +37,20 @@ class News(db.Model):
 class Comments(db.Model):
 	__tablename__ = 'comments'
 	cid = db.Column(db.Integer,primary_key=True,autoincrement=True)
-	newstype = db.Column(db.String(16),nullable=False)
 	newsid = db.Column(db.Integer,db.ForeignKey('news.pid'),nullable=False) # 是table名（和mysql语句有关），不是类名
 	userid = db.Column(db.Integer,db.ForeignKey('user.uid'),nullable=False)
 	comment = db.Column(db.String(255),nullable=False)
-	time = db.Column(db.DateTime,nullable=False)
-	touser = db.Column(db.Integer,db.ForeignKey('user.uid'))
+	time = db.Column(db.DateTime,default=datetime.now)
+	# touser_id = db.Column(db.Integer)
 
 	# 创建类之间的关系
 	# user_ = db.relationship('User',backref=db.backref('comments')) # 系统自动去User类找表名为user的UID
 	# 调用user，会找到一个User类
 	# backref 反向引用 使用User.comments（直接是User类），找到所有与一个User类关联的Comments类
 	# 两个类相互关联，只用创一个，另一个不用创建
-	# news_ = db.relationship('News',backref=db.backref('comments'))
-	# touser_ = db.relationship('User',backref=db.backref('tocomments')) 
-
+	news = db.relationship('News',backref=db.backref('comments',order_by=-time))
+	user = db.relationship('User',backref=db.backref('comments')) 
+	# touser = db.relationship('User',backref=db.backref('becomments')) 
 '''
 # 待管理员审核文章
 class WaitNews(db.Model):

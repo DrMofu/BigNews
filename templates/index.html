@@ -2,22 +2,28 @@
 
 {% block title %}首页{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
 
 {% block main %}
-<div  style="text-align: center">
-	<h1>欢迎来到大新闻 测试界面</h1>
-	<a href="{{ url_for('login') }}">登录</a>
-	<a href="{{ url_for('register') }}">注册</a>
-	<a href="{{ url_for('newsPage',newsId=1)}}">新闻页面</a>
-	<a href="{{ url_for('crawler')}}">爬虫</a>
-	<a href="{{ url_for('release')}}">发新闻</a>
-	<a href="{{ url_for('user')}}">个人信息页</a>
-	{% if username %}
-		<p>欢迎{{ username }}</p>
-		<a href="{{ url_for('logout')}}">一键登出</a>
-	{% else %}
-		<p>未登录</p>
-	{% endif %}
+<div class="main">
+    <ul>
+        {% for news in news_ %}
+            <li>
+                <div class="avatar-group">
+                    <img src="{{url_for('static',filename='images/logo.png')}}" class="avatar" alt="">
+                </div>
+                <div class="news-group">
+                    <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
+                    <p class="news-content">{{news.article}}</p>
+                    <div class="news-info">
+                        <span class="news-author">{{news.author}}</span>
+                        <span class="news-time">{{news.time}}</span>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
-{% endblock %} 
+{% endblock %}
