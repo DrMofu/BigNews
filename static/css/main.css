@@ -1,0 +1,37 @@
+.headline {
+    width: 100%;
+    position: relative;
+}
+.headline-img{
+    position: relative;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.headline-img img{
+    position: relative;
+    width: 100%;
+}
+.headline-card {
+    width: 50%;
+    background: rgba(255, 255, 255, 0.72);
+    position: absolute;
+    bottom: 0px;
+    padding: 0px 16px;
+}
+.headline-content {
+    width: 50%;
+    display: inline-block;
+}
+.headline-info {
+    display: inline-block;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+}
+.news-card {
+    width: 440px;
+    border: 1px solid #bdbdbd;
+    background-color: #ffffff;
+    padding: 0px 0px 20px 0px;
+    margin: 8px;
+}

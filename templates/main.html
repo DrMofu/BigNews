@@ -4,6 +4,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">  
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}"> 
 {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{url_for('static',filename='js/masonry.pkgd.min.js')}}"></script>
@@ -17,25 +18,20 @@
     </script>
 {% endblock %}
 {% block main %}
-    <div class="vacan"></div>
-    <div class="container">
-        <div class="one">
-            <div class="card">
-                <div class="avatar-group">
-                    <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
-                        <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
-                    </a>
-                </div>
-                <div class="news-group">
-                    <p class="news-title"><a href="{{url_for('newsPage',newsId=newss[0].pid)}}">{{newss[0].title}}</a></p>
-                    <p class="news-content">{{newss[0].article}}</p>
-                    <div class="news-info">
-                        <span class="news-author">{{newss[0].author_user.username}}</span>
-                        <span class="news-time">{{newss[0].time}}</span>
-                    </div>
-                </div>
+    <div class="headline">
+        <div class="headline-img">
+            <img src="{{url_for('static',filename='images/newsmain.jpg')}}" alt="">
+        </div>
+        <div class="headline-card">
+            <h1 class="headline-title"><strong>{{newss[0].title}}</strong></h1>
+            <p class="headline-content">{{newss[0].article}}</p>
+            <div class="headline-info">
+                <span><small>{{newss[0].author_user.username}}</small></span>
+                <span><small>{{newss[0].time}}</small></span>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div id="mescroll" class="row masonry mescroll">
             {% for news in newss[1:] %}
                 <div class="col-md-4 item">
@@ -58,4 +54,16 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- <div class="news-card">
+    <img src="../img/标题1.jpg" class="img-responsive">
+    <h4 class="news-card-title"><strong>青海全省连续9天用电零排放：刷新全清洁能源供电世界纪录</strong></h4>
+    <p class="news-card-content">
+        6月20日0时至28日24时，国家电网组织在青海全省连续9天216小时全部以水、风、 光等清洁能源供电，实现用电零排放，再次改写全清洁能源供电的世界纪录。
+    </p>
+    <div class="news-card-info">
+        <span><small>中国智库</small></span>
+        <span><small>26赞</small></span>
+    </div>
+    </div> -->
 {% endblock %}
