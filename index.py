@@ -21,7 +21,7 @@ def test():
 @app.route('/')
 def index():
 	content = {
-		'news_' : News.query.order_by('-time').limit(10).all()
+		'newss' : News.query.order_by('-time').limit(10).all()
 	}
 
 	return render_template('index.html',**content)
@@ -73,7 +73,7 @@ def register():
 					return '两次密码不相符'
 				else:
 					nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
-					user = User(type=0,username=username,password=password1,signtime=nowTime)
+					user = User(type=1,username=username,password=password1,signtime=nowTime)
 					db.session.add(user)
 					db.session.commit()
 					return 'finished'
@@ -125,6 +125,7 @@ def newsPage(newsId):
 	news = News.query.filter(News.pid == newsId).first()
 	return render_template('news.html',news=news)
 
+
 # add_comment 添加评论
 @app.route('/add_comment/', methods=['POST'])
 @login_required
@@ -148,6 +149,10 @@ def add_comment():
 def crawler():
 	return_list = crawler_36kr()
 	for news in return_list:
+		username = news.author
+		user = create_credit_user(username) # 创建用户或查询用户
+		news.author_user = user # 绑定用户与新闻
+		news.author_id = user.uid
 		db.session.add(news)
 		db.session.commit()
 	return 'finished'
@@ -159,7 +164,7 @@ def crawler():
 def get_info():
 	if session.get('username'):
 		g.username = session['username']
-
+		
 
 # context_processor 对所有渲染文档，统一变量
 @app.context_processor
@@ -171,6 +176,22 @@ def context_pro():
 	if hasattr(g,'username'):
 		return{'username':g.username}
 	return {}
+
+
+
+
+# 默认创建一个特定用户
+def create_credit_user(username, type=2, password='123456', describe='认证用户'):
+	user = User.query.filter(User.username == username).first()
+	if user:
+		# print("%s 用户已存在" % username)
+		return user
+	user = User(username=username,type=type,password=password,describe=describe)
+	db.session.add(user)
+	db.session.commit()
+	return user
+
+
 
 if __name__ == '__main__':
 	app.run()

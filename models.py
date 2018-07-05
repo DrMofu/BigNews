@@ -5,13 +5,14 @@ from datetime import datetime
 class User(db.Model):
 	__tablename__ = 'user'
 	uid = db.Column(db.Integer,primary_key=True,autoincrement=True)
-	type = db.Column(db.Integer,nullable=False)
+	type = db.Column(db.Integer,nullable=False,default=1)  #  1 普通用户  2 认证用户  3 管理员
+
 	username = db.Column(db.String(16),nullable=False)
 	password = db.Column(db.String(16),nullable=False)
 	signtime = db.Column(db.DateTime,nullable=False,default=datetime.now)
-	describe = db.Column(db.String(32))
+	describe = db.Column(db.String(32),default=' ')
+	picurl =db.Column(db.String(32),default='images/users/user_default.png')
 	# 可以使用 Comments(所有留言)，Tocomments（所有被回复），Likes(所有点的赞的id）
-
 
 # 新闻数据表集
 class News(db.Model):

@@ -10,9 +10,9 @@ p{
 }
 #box{
     background-color: #f7f7f7;
-    padding-bottom: 100px;
-    border:solid #666666;
-    border-width: 0px 1px 0px 1px;
+    padding-bottom: 30px;
+    /*border:solid #666666;*/
+    /*border-width: 0px 1px 0px 1px;*/
 }
 
 #title_box{
@@ -187,7 +187,99 @@ p{
     float: left;
 }
 
-/*µ±²»ÊÇÒÆ¶¯¶ËÊ±*/
+
+.comment_box{
+    /*background-color: rgb(248,247,246);*/
+    background-color: #ffffff;
+    margin-top: 5%;
+}
+.comment_title{
+    text-align: center;
+    margin-top: 6%;
+}
+.comment_img{
+    display: inline;
+    float: right;
+}
+.comment_m{
+    font-size: 24px;
+    display: inline;
+    font-weight: bold;
+}
+.comment_nums{
+    background-color: rgb(35,121,238);
+    color: #ffffff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius:15px;
+    display: inline;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.user_box{
+
+}
+
+.user_name{
+    display: inline;
+    font-weight: bold;
+}
+
+.user_time{
+    font-size: 12px;
+    color: #8c8c8c;
+    display: inline;
+}
+
+.user_reply{
+    display: inline;
+    font-size: 10px;
+
+}
+.user_content{
+    font-size: 12px;
+    color: #8c8c8c;
+    margin: 1% 0% 2% 0%;
+}
+
+#my_comment_box{
+    border: 1px solid #dddddd;
+    box-shadow: 2px 2px 5px #dddddd;
+    background-color: #eeeee;
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 10% ;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.my_comment_title{
+    font-size: 24px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.my_comment_input{
+    width:100%;
+    margin-top: 2%;
+    overflow: hidden;
+    resize: none;
+    margin-bottom: 5%;
+    /*border: 0px;*/
+}
+
+.my_comment_img{
+    margin-top: 5%;
+}
+
+.my_comment_button{
+    float: right;
+}
+
+.change_img{
+    max-width: 100%;
+}
+/*当不是移动端时*/
 @media only screen and (min-width: 768px) {
     #author_name{
         font-weight: bold;
@@ -213,39 +305,7 @@ p{
 }
 
 @media only screen and (min-width: 992px) {
-
-}
-
-
-/*暂时评论页面css*/
-.news-info{
-    text-align: center;
-    margin-top: 20px;
-}
-.comment-list{
-    padding-left: 0;
-}
-.comment-list li{
-    list-style: none;
-    border-bottom: 1px solid blue;
-    padding-top: 10px;
-}
-.avatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-.user-info{
-    font-size: 16px;
-    color: #9b9b9b;
-    line-height: 40px;
-}
-.user-info .username{
-    margin-left: 20px;
-}
-.user-info .create-time{
-    float: right;
-}
-.comment-content{
-    margin-left: 60px;
+    .change_img{
+        max-width: 80%;
+    }
 }

@@ -1,16 +1,26 @@
 .logo{
-    height: 40px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
 }
-.main{
-    background-color: white;
-    width: 730px;
-    margin: 0 auto;
-    overflow: hidden;
+.navbar-brand{
     padding: 10px;
 }
+.main{
+    background-color: #f3f3f3;
+    margin: 0 auto;
+    overflow: hidden;
+}
 body{
-    background-color: #E0e0e0;
+    padding-top: 70px;
+    background-color: #f3f3f3;
 }
 .page-title{
     text-align: center;
+}
+@media screen and (max-width: 1000px) and (min-width:500px){
+    .navbar-nav li a{
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

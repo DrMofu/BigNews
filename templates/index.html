@@ -4,26 +4,54 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <script type="text/javascript" src="./static/js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="./static/js/imagesloaded.pkgd.min.js" ></script>
 {% endblock %}
 
 {% block main %}
-<div class="main">
-    <ul>
-        {% for news in news_ %}
-            <li>
-                <div class="avatar-group">
-                    <img src="{{url_for('static',filename='images/logo.png')}}" class="avatar" alt="">
+<div class="container">
+    <div class="one">
+        <div class="card">
+            <div class="avatar-group">
+                <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+            </div>
+            <div class="news-group">
+                <p class="news-title"><a href="{{url_for('newsPage',newsId=newss[0].pid)}}">{{newss[0].title}}</a></p>
+                <p class="news-content">{{newss[0].content}}</p>
+                <div class="news-info">
+                    <span class="news-author">{{newss[0].author.username}}</span>
+                    <span class="news-time">{{newss[0].create_time}}</span>
                 </div>
-                <div class="news-group">
-                    <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
-                    <p class="news-content">{{news.article}}</p>
-                    <div class="news-info">
-                        <span class="news-author">{{news.author}}</span>
-                        <span class="news-time">{{news.time}}</span>
+            </div>
+        </div>
+    </div>
+    <div id="mescroll" class="row masonry mescroll">
+        {% for news in newss[1:] %}
+            <div class="col-md-3 item">
+                <div class="card">
+                    <div class="avatar-group">
+                        <a href="{{url_for('newsPage',newsId=news.pid)}}">
+                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        </a>
+                    </div>
+                    <div class="news-group">
+                        <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
+                        <p class="news-content">{{news.content}}</p>
+                        <div class="news-info">
+                            <span class="news-author">{{news.author.username}}</span>
+                            <span class="news-time">{{news.create_time}}</span>
+                        </div>
                     </div>
                 </div>
-            </li>
+            </div>  
         {% endfor %}
-    </ul>
-</div>
+    </div>
+ </div>
+    <script>
+        $('.masonry').imagesLoaded(function() {
+            $('.masonry').masonry({
+                itemSelector: '.item'
+            });
+        });
+    </script>
 {% endblock %}

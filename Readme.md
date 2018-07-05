@@ -38,13 +38,16 @@ python index.py
 ## 文件说明
 - index.py                  主程序
 - config.py                 配置文件
+- crawler.py                爬虫文件
+- decoratores.py            定义装饰器
+- exts.py                   定义公用的db，防止循环引用
 - manage.py                 存放各类操作指令，如数据库创建
 - models.py                  提供ORM方法的对数据库操作
 - requirements.txt          python包说明
 
 - static                    中存放css，js，img等内容
 - templates                 存放html
-- crawler                   存放爬虫文件
+
 - test                      为测试文件夹，所有成员可在其中创建一个以自己名称命名的文件夹，并在其中测试各个功能
 
 
@@ -73,7 +76,8 @@ pip install -r requirements.txt
 - 换回使用mysql数据库，找到之前出错问题。数据库搭建出ORM中类首字母大写，其余内容均小写
 
 2018.7.3
-- todo: 
-系统用户一键注册
-新闻详情页用户信息
-评论界面
+- 整合系统
+
+2018.7.5
+- 整合系统，初步完成
+

@@ -13,8 +13,48 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% block main %}{% endblock %} 
-    <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
-    <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img class="logo" src="{{url_for('static',filename='images/logo.png')}}"></a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{url_for('index')}}">精选<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">时政<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">军事<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">生活<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">社会<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">体育<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('index')}}">娱乐<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('release')}}">编辑新闻</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if username %}
+                        <li><a href="#">{{username}}</a></li>
+                        <li><a href="{{url_for('logout')}}">注销</a></li>
+                    {% else %}
+                        <li><a href="{{url_for('login')}}">登录</a></li>
+                        <li><a href="{{url_for('register')}}">注册</a></li>
+                    {% endif %}
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="main">
+        {% block main %}{% endblock %}
+        <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
+        <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    </div>
 </body>
 </html>
