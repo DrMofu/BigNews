@@ -21,7 +21,7 @@ def test():
 @app.route('/')
 def index():
 	content = {
-		'newss' : News.query.order_by('-time').limit(10).all()
+		'newss' : News.query.order_by('-time').limit(20).all()
 	}
 
 	return render_template('index.html',**content)
@@ -47,6 +47,7 @@ def login():
 			user = User.query.filter(User.username == username,User.password == password).first()
 			if user:
 				session['username'] = user.username
+				session['uid'] = user.uid
 				# session.permanent = True
 				return redirect(url_for('index'))
 			else:
@@ -76,7 +77,7 @@ def register():
 					user = User(type=1,username=username,password=password1,signtime=nowTime)
 					db.session.add(user)
 					db.session.commit()
-					return 'finished'
+					return redirect(url_for('login'))
 # logout 注销
 @app.route('/logout/')
 def logout():
@@ -93,9 +94,9 @@ def user():
 		return redirect(url_for('login'))
 
 # user_info 他人信息页
-@app.route('/user/<userid>')
-def user_info(userid):
-	return userid
+@app.route('/user/<username>')
+def user_info(username):
+	return username
 
 
 # release 发布文章模块
@@ -123,7 +124,10 @@ def release():
 @app.route('/news/<newsId>')
 def newsPage(newsId):
 	news = News.query.filter(News.pid == newsId).first()
-	return render_template('news.html',news=news)
+	likes = None
+	if hasattr(g,'uid'):
+		likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
+	return render_template('news.html',news=news,likes=likes)
 
 
 # add_comment 添加评论
@@ -143,6 +147,27 @@ def add_comment():
 	db.session.commit()
 	return redirect(url_for('newsPage',newsId = news_id))
 
+@app.route('/change_like/',methods=['POST'])
+@login_required
+def change_like():	
+	news_id = request.form.get('news_id')
+	username = g.username
+	user = User.query.filter(User.username == username).first()
+	news = News.query.filter(News.pid == news_id).first()
+	uid = user.uid
+	pid = news.pid
+	like = Likes.query.filter(Likes.uid==uid,Likes.pid==pid).first()
+	if like:#删除
+		db.session.delete(like)
+		news.likes -= 1
+	else:
+		like = Likes(uid=uid,pid=pid)
+		like.user = user
+		like.news = news
+		db.session.add(like)
+		news.likes += 1
+	db.session.commit()
+	return redirect(url_for('newsPage',newsId = news_id))
 
 # 爬虫模块
 @app.route('/crawler/')
@@ -164,7 +189,8 @@ def crawler():
 def get_info():
 	if session.get('username'):
 		g.username = session['username']
-		
+	if session.get('uid'):
+		g.uid = session['uid']	
 
 # context_processor 对所有渲染文档，统一变量
 @app.context_processor

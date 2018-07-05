@@ -71,5 +71,5 @@ class Likes(db.Model):
 	uid = db.Column(db.Integer,db.ForeignKey('user.uid'),nullable=False)
 	pid = db.Column(db.Integer,db.ForeignKey('news.pid'),nullable=False)
 
-	# user = db.relationship('User',backref=db.backref('likes'))
-	# news = db.relationship('News',backref=db.backref('likes'))
+	user = db.relationship('User',backref=db.backref('likes'))
+	news = db.relationship('News',backref=db.backref('likes_link'))

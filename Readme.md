@@ -80,4 +80,8 @@ pip install -r requirements.txt
 
 2018.7.5
 - 整合系统，初步完成
+- 点赞功能
 
+todo
+分类完善-按分类查询 按分类提交
+审核

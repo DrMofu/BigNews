@@ -279,6 +279,19 @@ p{
 .change_img{
     max-width: 100%;
 }
+
+
+
+/*新添加*/
+.like_button_box{
+    text-align: center;
+    margin-top:8%; 
+}
+
+.like_button{
+    min-width: 100px;
+    font-size: 16px;
+}
 /*当不是移动端时*/
 @media only screen and (min-width: 768px) {
     #author_name{
