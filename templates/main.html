@@ -20,10 +20,12 @@
 {% block main %}
     <div class="headline">
         <div class="headline-img">
-            <img src="{{url_for('static',filename='images/newsmain.jpg')}}" alt="">
+            <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
+                <img src="{{url_for('static',filename='images/newsmain.jpg')}}" alt="">
+            </a>
         </div>
         <div class="headline-card">
-            <h1 class="headline-title"><strong>{{newss[0].title}}</strong></h1>
+            <h1 class="headline-title"><a href="{{url_for('newsPage',newsId=newss[0].pid)}}" style="color: black;"><strong>{{newss[0].title}}</strong></a></h1>
             <p class="headline-content">{{newss[0].article}}</p>
             <div class="headline-info">
                 <span><small>{{newss[0].author_user.username}}</small></span>
