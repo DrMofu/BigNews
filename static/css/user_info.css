@@ -1,0 +1,140 @@
+.status-bar{
+    height: 42px;
+    border: 1px solid rgb(215, 214, 216)
+}
+.logo{
+    height:39px;
+    padding: 0 0 0 2%;
+    float: left
+}
+.picture{
+    height: 40px;
+    width: 100px;
+    border: 0;
+}
+.frame1{
+    padding:0% 0% 0% 5%;
+    float: left;
+}
+.search{
+    width:200px;
+    float: left;
+    padding: 2px 0 0 30px;
+}
+
+.user{
+    padding: 5% 0 0 0 ;
+    height: 200px;
+   
+}
+.headpicture{
+    padding: 0 0 0 50px;
+    width:170px;
+    float: left;
+}
+.userpicture{
+    width: 100px;
+    height: 100px;
+}
+.username{
+    margin-top:2%; 
+}
+.name{
+    font-weight: 800;
+    font-size: 20px;
+    font-style: italic;
+}
+.usermenu{
+}
+.usermenu1{
+    background-color: rgb(255, 255, 255);
+    border: 0;
+    color: black;
+}
+.dynamicmenu{
+    padding:10px 0 0 40px;
+}
+.dynamic{
+    background-color: rgb(255, 255, 255);
+    color: rgb(165, 161, 161);
+    width: 120px;
+    border: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+.dynamic1{
+    padding: 30px;
+}
+.picturesize{
+    height: 40px;
+    width: 40px;
+    float: left;
+}
+.followname{
+    font-size: 15px;
+    color: rgb(13, 14, 14);
+    float: left;
+    width: 60px;
+    padding: 10px;
+    height: 20px;
+}
+.followtime{
+    font-size: 14px;
+    color: rgb(165, 172, 170);
+    padding: 10px; 
+}
+.write{
+    border: 1px solid rgb(211, 214, 214);
+    width: 600px;
+    height: 90px;
+}
+.writepicture{
+    height: 80px;
+    width: 80px;
+    float: left;
+    margin: 5px 0 0 20px;
+}
+.writername{
+    padding: 5px 0 0 0;
+    font-size: 20px;
+    font-weight: 700;
+    height: 30px
+}
+.writeintrodution{
+    height: 50px;
+    width: 60%;
+    word-wrap: break-word;
+    float: left;
+}
+.guanzhu{
+    background-color: rgb(201, 199, 195);
+    border: 0;
+    height: 30px;
+    width: 80px;
+    color: rgb(252, 252, 252)
+}
+.titleframe{
+    width: 75%;
+    float: left;
+}
+.title{
+    font-size: 20px;
+}
+.essay{
+    word-wrap: break-word;
+    height: 80px;
+}
+.essaypicture{
+    height: 90px;
+    width: 90px;    
+}
+.secondframe{
+    margin: 200px 0 0 0 ;
+}
+.words{
+    font-size: 18px;
+    color: rgb(109, 108, 108);
+}
+.anniu{
+    height: 40px;
+}
