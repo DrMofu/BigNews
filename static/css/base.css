@@ -29,4 +29,14 @@ body{
         padding-left: 0;
         padding-right: 0;
     }
+    #navi{
+        background:rgba(255,255,255);
+        border: none;
+    }
+}
+@media screen and (max-width: 500px){
+    #navi{
+        background:rgba(255,255,255);
+        border: none;
+    }
 }
