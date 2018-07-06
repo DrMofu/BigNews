@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block title %}首页{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{  url_for('static',filename='css/user_info.css') }}" type="text/css"/>
+{% endblock %}
+
+{% block script %}{% endblock %}
+
+{% block main %}
+<!-- <div class="status-bar row">
+    <div class="logo col-md-2 col-sm-2">
+        <img src="C:\Users\chunyu\Pictures\HTML\logo.png" class="img-thumbnail picture">
+    </div>
+    <div class="frame1 col-md-3 col-sm-6 hidden-xs">
+        <ul class="nav nav-pills">
+            <li><a href="#" style="color: black;">发现</a></li>
+            <li><a href="#" style="color: black;">关注</a></li>
+            <li><a href="#" style="color: black;">消息</a></li>
+        </ul>
+    </div>
+    <div class="col-sx-1 hidden-md hidden-lg hidden-sm visible-xs">
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle anniu" id="dropdownMenu1" data-toggle="dropdown">
+                    菜单
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">发现</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">关注</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">消息</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <div class="search col-md-2 col-sm-4 hidden-xs">
+        <form class="bs-example bs-example-form" role="form">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon">搜索</span>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-2 hidden-sm hidden-xs">
+        <ul class="nav nav-pills">
+            <li><a href="#" style="color: rgb(218, 209, 209);background-color:#ff6e40">写文章</a></li>
+        </ul>
+    </div>
+</div> -->
+<div class="container">
+    <div  class="row">
+        <div class="col-md-1 hidden-sm">
+            &nbsp;
+        </div>
+        <div class="col-md-8">
+            <div class="user">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <img src="{{url_for('static',filename='images/users/user_default.png')}}" class="img-circle img-responsive">
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="username">
+                            <p class="name">User1</p>
+                        </div>
+                        <div class="usermenu ">
+                            <a href="#" class="btn btn-info usermenu1">粉丝>158</a>
+                            <a href="#" class="btn btn-info usermenu1">关注>78</a>
+                            <a href="#" class="btn btn-info usermenu1">收藏>15</a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul id="myTab" class="nav nav-tabs dynamicmenu">
+                <li class="active">
+                    <a href="#动态" data-toggle="tab" class="dynamic">动态</a>
+                </li>
+                <li>
+                    <a href="#评论" data-toggle="tab" class="dynamic">评论</a>
+                </li>
+                <li>
+                    <a href="#热门" data-toggle="tab" class="dynamic">热门</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="动态">
+                    <div class="dynamic1">
+                        <div>
+                            <div class="picturesize">
+                                <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail img-circle">
+                            </div>
+                            <div class="followname">
+                                  <p>User1</P>
+                            </div>
+                            <div class="followtime">
+                                <p>关注了作者    7/2 16：30</p>
+                            </div>
+                        </div>
+                        <div class="write">
+                            <div class="writepicture">
+                                <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail img-circle">
+                            </div>
+                            <div class="writername">
+                                <p>User2</p>
+                            </div>
+                            <div class="writeintrodution">
+                                <p>历史文化底蕴深厚，讲解历史涵盖心理学和帝王学</p>
+                            </div>
+                            <button type="button" class="guanzhu ">已关注</button>
+                        </div>
+                    </div>
+                        <div class="dynamic1">
+                            <div>
+                                <div class="picturesize">
+                                    <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail img-circle">
+                                </div>
+                                <div class="followname">
+                                    <p>User1</P>
+                                </div>
+                                <div class="followtime">
+                                    <p>关注了作者    7/3 17：30</p>
+                            </div>
+                        </div>
+                        <div class="write">
+                            <div class="writepicture">
+                                <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail img-circle">
+                            </div>
+                            <div class="writername">
+                                <p>User3</p>
+                            </div>
+                            <div class="writeintrodution">
+                                <p>历史文化底蕴深厚，讲解历史涵盖心理学和帝王学</p>
+                            </div>
+                            <button type="button" class="guanzhu">已关注</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="评论">
+                    <div class="dynamic1">
+                        <div class="titleframe">
+                            <div class="title">
+                                <a href="#" style="color: black">谈《傲慢与偏见》</a>
+                            </div>
+                            <div class="essay">
+                                <p>01 《傲慢与偏见》里面描写了四段爱情的故事。尤其以伊丽莎白和达西的那一段最为经典，看起来真是一段很让人喜欢的爱情。 四段爱情故事究竟是怎么样的...</p>
+                            </div>
+                            <div class="information">
+                                <a href="#" style="color: black">莫雨</a>
+                            </div>
+                        </div>
+                        <div class="assaypicture ">
+                            <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail" style="border: 0;">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="热门">
+                    <div class="dynamic1">
+                        <div class="titleframe">
+                            <div class="title">
+                                <a href="#" style="color: black">谈《傲慢与偏见》</a>
+                            </div>
+                            <div class="essay">
+                                <p>01 《傲慢与偏见》里面描写了四段爱情的故事。尤其以伊丽莎白和达西的那一段最为经典，看起来真是一段很让人喜欢的爱情。 四段爱情故事究竟是怎么样的...</p>
+                            </div>
+                            <div class="information">
+                                <a href="#" style="color: black">莫雨</a>
+                            </div>
+                        </div>
+                        <div class="assaypicture ">
+                            <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumbnail" style="border: 0;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="secondframe">
+                <a href="#" class="words">我关注的专题</a>
+                <br>
+                <br>
+                <a href="#" class="words">我喜欢的文章</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

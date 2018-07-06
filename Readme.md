@@ -16,14 +16,22 @@
 
 - [mysql windows版](https://dev.mysql.com/downloads/installer/)
 
-4. 数据库创建
+4. mysql数据库设置
+
+在mysql中输入
+```
+create database db_bignews
+```
+在config.py文件中将USERNAME和PASSWORD改为你自己mysql的用户名和密码
+
+5. 数据库创建
 
 ```
 python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
+python manage.py init_user
 ```
-
 
 <!-- 3. 创建数据库
 ```
@@ -85,3 +93,5 @@ pip install -r requirements.txt
 todo
 分类完善-按分类查询 按分类提交
 审核
+
+关注
