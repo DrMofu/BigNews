@@ -24,6 +24,14 @@ def index():
 		'newss' : News.query.order_by('-time').limit(20).all()
 	}
 
+	return render_template('main.html',**content)
+
+@app.route('/catalogue')
+def catalogue():
+	content = {
+		'newss' : News.query.order_by('-time').limit(20).all()
+	}
+
 	return render_template('index.html',**content)
 
 # user模块

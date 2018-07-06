@@ -13,7 +13,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav id="navi" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -30,12 +30,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{url_for('index')}}">精选<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">时政<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">军事<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">生活<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">社会<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">体育<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('index')}}">娱乐<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">时政<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">军事<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">生活<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">社会<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">体育<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue')}}">娱乐<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('release')}}">编辑新闻</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

@@ -11,12 +11,18 @@
     margin: 0 auto;
     overflow: hidden;
 }
+.vacan{
+    height: 60px;
+}
 body{
-    padding-top: 70px;
     background-color: #f3f3f3;
 }
 .page-title{
     text-align: center;
+}
+#navi{
+    background:rgba(255,255,255,0.72);
+    border: none;
 }
 @media screen and (max-width: 1000px) and (min-width:500px){
     .navbar-nav li a{

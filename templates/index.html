@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}首页{% endblock %}
+{% block title %}条目{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
@@ -18,20 +18,22 @@
 </script>
 {% endblock %}
 {% block main %}
-<div class="container">
-    <div class="one">
-        <div class="card">
-            <div class="avatar-group">
-                <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
-                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
-                </a>
-            </div>
-            <div class="news-group">
-                <p class="news-title"><a href="{{url_for('newsPage',newsId=newss[0].pid)}}">{{newss[0].title}}</a></p>
-                <p class="news-content">{{newss[0].article}}</p>
-                <div class="news-info">
-                    <span class="news-author">{{newss[0].author_user.username}}</span>
-                    <span class="news-time">{{newss[0].time}}</span>
+    <div class="vacan"></div>
+    <div class="container">
+        <div class="one">
+            <div class="card">
+                <div class="avatar-group">
+                    <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
+                        <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                    </a>
+                </div>
+                <div class="news-group">
+                    <p class="news-title"><a href="{{url_for('newsPage',newsId=newss[0].pid)}}">{{newss[0].title}}</a></p>
+                    <p class="news-content">{{newss[0].article}}</p>
+                    <div class="news-info">
+                        <span class="news-author">{{newss[0].author_user.username}}</span>
+                        <span class="news-time">{{newss[0].time}}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,9 +55,8 @@
                             <span class="news-time">{{news.time}}</span>
                         </div>
                     </div>
-                </div>
-            </div>  
-        {% endfor %}
+                </div>  
+            {% endfor %}
+        </div>
     </div>
- </div>
 {% endblock %}
