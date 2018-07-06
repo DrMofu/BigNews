@@ -16,6 +16,7 @@
 	<a href="{{ url_for('crawler')}}">爬虫</a>
 	<a href="{{ url_for('release')}}">发新闻</a>
 	<a href="{{ url_for('user')}}">个人信息页</a>
+	<a href="{{ url_for('news_confirm')}}">管理员确认页</a>
 	{% if username %}
 		<p>欢迎{{ username }}</p>
 		<a href="{{ url_for('logout')}}">一键登出</a>

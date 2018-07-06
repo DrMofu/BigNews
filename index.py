@@ -21,7 +21,7 @@ def test():
 @app.route('/')
 def index():
 	content = {
-		'newss' : News.query.order_by('-time').limit(20).all()
+		'newss' : News.query.filter(News.waitforcheck > 0).order_by('-time').limit(20).all()
 	}
 
 	return render_template('main.html',**content)
@@ -36,7 +36,9 @@ def catalogue():
 
 # user模块
 '''
-login      --  登录+注册页
+login      --  登录
+register   --  注册
+logout     --  登出
 user       --  个人信息页
 user_info  --  他人信息页
 '''
@@ -106,6 +108,14 @@ def user():
 def user_info(username):
 	return username
 
+# 新闻模块
+'''
+release      --  发布文章
+newsPage     --  新闻页面
+news_confirm --  新闻审核
+add_comment  --  用户添加评论
+change_like  --  用户点赞
+'''
 
 # release 发布文章模块
 @app.route('/release/', methods = ['GET', 'POST'])
@@ -136,6 +146,34 @@ def newsPage(newsId):
 	if hasattr(g,'uid'):
 		likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
 	return render_template('news.html',news=news,likes=likes)
+
+
+# news_confirm 新闻审核
+@app.route('/confirm/')
+@admin_required
+def news_confirm():
+	news = News.query.filter(News.waitforcheck == 0).order_by('-time').limit(8).all()
+	news_lenth = len(news)
+	content = {
+		'newss' : news,
+		'news_lenth' : news_lenth
+	}
+
+	return render_template('confirm.html',**content)
+
+@app.route('/confirm/upgrade/', methods=['POST'])
+@admin_required
+def confirm_upgrade():
+	news_id = request.form.get('news_id')
+	result = request.form.get('result')
+	news = News.query.filter(News.pid == news_id).first()
+	if result == 'yes':
+		news.waitforcheck=2 # 管理员审核通过
+	else:
+		news.waitforcheck=-1 # 管理员审核不通过
+	db.session.commit()
+	return redirect(url_for('news_confirm'))
+
 
 
 # add_comment 添加评论
