@@ -9,7 +9,7 @@
     <link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
-    <link href="{{ url_for('static',filename='css/base.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/base.css')}}" rel="stylesheet">    
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -40,7 +40,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if username %}
-                        <li><a href="{{url_for('user_info',username=username)}}">{{username}}</a></li>
+                        <li><a href="{{url_for('user')}}">{{username}}</a></li>
                         <li><a href="{{url_for('logout')}}">注销</a></li>
                     {% else %}
                         <li><a href="{{url_for('login')}}">登录</a></li>
@@ -52,7 +52,7 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="main">
-        {% block main %}{% endblock %}
+        {% block main %}{% endblock %}        
         <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
         <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
         {% block script %}{% endblock %}

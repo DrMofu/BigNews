@@ -3,18 +3,19 @@
 {% block title %}条目{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">  
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
-{% block script %}
-    <script type="text/javascript" src="{{url_for('static',filename='js/masonry.pkgd.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='js/imagesloaded.pkgd.min.js')}}" ></script>
-    <script>
-        $('.masonry').imagesLoaded(function() {
-            $('.masonry').masonry({
-                itemSelector: '.item'
-            });
+
+{% block script %}      
+<script type="text/javascript" src="{{url_for('static',filename='js/masonry.pkgd.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/imagesloaded.pkgd.min.js')}}" ></script>
+<script>
+    $('.masonry').imagesLoaded(function() {
+        $('.masonry').masonry({
+            itemSelector: '.item'
         });
-    </script>
+    });
+</script>
 {% endblock %}
 {% block main %}
     <div class="vacan"></div>
@@ -36,22 +37,22 @@
                 </div>
             </div>
         </div>
-        <div id="mescroll" class="row masonry mescroll">
-            {% for news in newss[1:] %}
-                <div class="col-md-4 item">
-                    <div class="card">
-                        <div class="avatar-group">
-                            <a href="{{url_for('newsPage',newsId=news.pid)}}">
-                                <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
-                            </a>
-                        </div>
-                        <div class="news-group">
-                            <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
-                            <p class="news-content">{{news.article}}</p>
-                            <div class="news-info">
-                                <span class="news-author">{{news.author_user.username}}</span>
-                                <span class="news-time">{{news.time}}</span>
-                            </div>
+    </div>
+    <div id="mescroll" class="row masonry mescroll">
+        {% for news in newss[1:] %}
+            <div class="col-md-4 item">
+                <div class="card">
+                    <div class="avatar-group">
+                        <a href="{{url_for('newsPage',newsId=news.pid)}}">
+                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        </a>
+                    </div>
+                    <div class="news-group">
+                        <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
+                        <p class="news-content">{{news.article}}</p>
+                        <div class="news-info">
+                            <span class="news-author">{{news.author_user.username}}</span>
+                            <span class="news-time">{{news.time}}</span>
                         </div>
                     </div>
                 </div>  

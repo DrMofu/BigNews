@@ -40,7 +40,7 @@ login      --  登录+注册页
 user       --  个人信息页
 user_info  --  他人信息页
 '''
-
+ 
 # login 登录
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
@@ -97,7 +97,7 @@ def logout():
 @app.route('/user/')
 def user():
 	if hasattr(g,'username'):
-		return g.username
+		return render_template('/user/info.html')
 	else:
 		return redirect(url_for('login'))
 

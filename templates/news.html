@@ -136,15 +136,15 @@
                 {% endfor %} 
 
                 <!--个人评论框-->
-                <div id="my_comment_box">
+                <div id="my_comment_box" class="col-md-10 col-md-offset-1">
                     <p class="my_comment_title">添加评论</p>
                     <form action="{{url_for('add_comment')}}" method="POST">
                         <input type="hidden" name="news_id" value="{{news.pid}}">
                         <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
+                            <div class="col-xs-10 col-xs-offset-1" >
                                 <hr/>
                             </div>
-                            <div class="col-xs-8 col-xs-offset-2">
+                            <div class="col-xs-10 col-xs-offset-1">
                                 <textarea name="push_comment" type="text" rows="4" class="my_comment_input"></textarea>
                                 <button class="btn btn-primary my_comment_button" >提交评论</button>
                             </div>
