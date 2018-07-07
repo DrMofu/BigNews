@@ -1,40 +1,89 @@
 {% extends 'base.html' %}
 
-{% block title %}发布{% endblock %}
+{% block title %}发布新闻{% endblock %}
 
 {% block head %}
-<style type="text/css">
-.form-container{
-    width: 500px;
-    margin: 0 auto;
-    text-align: right;
-}
-</style>
+
+<link href="{{url_for('static',filename='css/post.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='css/fileinput.min.css')}}" media="all" rel="stylesheet" type="text/css" />
+<script src="{{url_for('static',filename='js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/fileinput.min.js')}}"></script>
+<!-- 
+<script>
+    function init() {
+        var innerHeight = window.innerHeight;
+        var inputboxHeight = document.getElementById("input-box").offsetHeight;
+        if (inputboxHeight < innerHeight - 60) {
+            document.getElementById("input-box").style.marginTop = (innerHeight - inputboxHeight) / 2 + "px";
+            document.getElementById("input-box").style.marginBottom = (innerHeight - 60 - inputboxHeight) / 2 + "px";
+        } else {
+            document.getElementById("input-box").style.marginTop = 24 + "px";
+        }
+    }
+    window.onload = init;
+</script> -->
 {% endblock %}
 
 {% block main %}
-    <div class="vacan"></div>
-    <form action="" method="post">
+    <div id="input-box" class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+        <form action="" enctype='multipart/form-data' method="post">
+            <div class="form-container">
+                <h3 id="title">发布新闻</h3>
+                <input id="title-input" type="text" class="form-control" name='title' placeholder="输入标题(不多于20个字): ">
+                <textarea name="content" class="form-control" rows="10" placeholder="输入正文:"></textarea>
+                <div id="pic-input">
+                    <label class="control-label">上传缩略图</label>
+                    <input id="input-id" type="file" name="pic" class="file" data-preview-file-type="text">
+                </div>
+                <div id="btn-group"> 
+                    <div class="form-group" style="width: 30%;float: left;margin-bottom: 0;">
+                        <select class="form-group form-control" name="type" style="margin-bottom: 0;">
+                            <option value="经济">经济</option>
+                            <option value="政治">政治</option>
+                            <option value="生活">生活</option>
+                            <option value="运动">运动</option>
+                            <option value="科技">科技</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="submit">提交</button>
+                    <br style="clear: both; margin-bottom:0;height:0px;">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- <form action="" enctype='multipart/form-data' method="post">
         <div class="form-container">        	
         	<h3 class="page-title">发布新闻</h3>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="请输入标题" name="title">
             </div>
-            <select class="form-group form-control" >
+            <select class="form-group form-control" name="type">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <!-- <input type="text" class="form-control" placeholder="类别" name="type"> -->
             </select>
 
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="10" placeholder="请输入内容"></textarea>
             </div>
             <div class="form-group">
+                <h1>上传图片</h1>
+                <input type="file" name="pic">
+            </div>
+            <div class="form-group">
                 <button class="btn btn-primary">发布</button>
             </div>
         </div>
-    </form>
+    </form> -->
+
+    <script>
+        $('textarea').each(function() {
+            this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+        }).on('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    </script>
 {% endblock %}

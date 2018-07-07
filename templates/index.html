@@ -18,13 +18,18 @@
 </script>
 {% endblock %}
 {% block main %}
-    <div class="vacan"></div>
+    <!-- <div class="vacan"></div> -->
     <div class="container">
         <div class="one">
             <div class="card">
                 <div class="avatar-group">
                     <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
-                        <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        {% if newss[0].picurl==None %}
+                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        {% else %}
+                            <img src="static/{{newss[0].picurl}}" class="avatar" alt="">
+                        {% endif %}
+                        <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                     </a>
                 </div>
                 <div class="news-group">
@@ -38,24 +43,31 @@
             </div>
         </div>
     </div>
-    <div id="mescroll" class="row masonry mescroll">
-        {% for news in newss[1:] %}
-            <div class="col-md-4 item">
-                <div class="card">
-                    <div class="avatar-group">
-                        <a href="{{url_for('newsPage',newsId=news.pid)}}">
-                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
-                        </a>
-                    </div>
-                    <div class="news-group">
-                        <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
-                        <p class="news-content">{{news.article}}</p>
-                        <div class="news-info">
-                            <span class="news-author">{{news.author_user.username}}</span>
-                            <span class="news-time">{{news.time}}</span>
+    <div class="container">
+        <div id="mescroll" class="row masonry mescroll">
+            {% for news in newss[1:] %}
+                <div class="col-md-4 item">
+                    <div class="card">
+                        <div class="avatar-group">
+                            <a href="{{url_for('newsPage',newsId=news.pid)}}">
+                                {% if news.picurl==None %}
+                                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                {% else %}
+                                    <img src="static/{{news.picurl}}" class="avatar" alt="">
+                                {% endif %}
+                                <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
+                            </a>
                         </div>
-                    </div>
-                </div>  
+                        <div class="news-group">
+                            <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
+                            <p class="news-content">{{news.article}}</p>
+                            <div class="news-info">
+                                <span class="news-author">{{news.author_user.username}}</span>
+                                <span class="news-time">{{news.time}}</span>
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
             {% endfor %}
         </div>
     </div>

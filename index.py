@@ -7,6 +7,8 @@ from crawler import *
 from decorators import *
 import config
 import datetime
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -23,7 +25,6 @@ def index():
 	content = {
 		'newss' : News.query.order_by('-time').limit(20).all()
 	}
-
 	return render_template('main.html',**content)
 
 @app.route('/catalogue')
@@ -117,8 +118,15 @@ def release():
 		title = request.form.get('title')
 		content = request.form.get('content')
 		type = request.form.get('type')
+
+		pic=request.files['pic']
+		basepath=os.path.abspath(os.path.dirname(__file__))
+		upload_path=os.path.join(basepath,'static/images/news',secure_filename(pic.filename))
+		pic.save(upload_path)
+		picurl=os.path.join('images/news',secure_filename(pic.filename))
+
 		user = User.query.filter(User.username == g.username).first()
-		news = News(title=title,article=content,type=type,source='用户发布',author=g.username,waitforcheck=0)
+		news = News(title=title,article=content,type=type,source='用户发布',picurl=picurl,author=g.username,waitforcheck=0)
 		news.author_user = user
 		news.author_id = user.uid
 

@@ -1,0 +1,64 @@
+body {
+    background-color: #f5f5f5;
+}
+
+#navbarToHoldplace {
+    height: 60px;
+}
+
+#input-box {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px #dddddd;
+    padding: 20px 24px 24px 24px;
+}
+
+#title {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#title-input {
+    margin: 12px 0px;
+}
+
+#content-input {
+    margin: 12px 0px;
+    height: 200px;
+}
+
+#pic-input {
+    margin: 12px 0px;
+}
+
+#input-id {
+    color: #757575;
+}
+
+#submit {
+    /* position: absolute;
+    bottom:0px;
+    right:0px; */
+    float:right;
+
+    background-color: #e71c23;
+    color: #ffffff;
+    border: 0px;
+    width: 115px;
+    height: 34px;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1;
+}
+
+#btn-group {
+    margin-top: 12px;
+    position: relative;
+}
+
+@media screen and (min-width: 700px){
+    #input-box{
+        margin-top: 2%;
+    }
+}
