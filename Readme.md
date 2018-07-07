@@ -8,7 +8,7 @@
 
 - [anaconda官网](https://www.anaconda.com/download/) 或 [清华镜像](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/)
 
-2. 安装必要的python包：flask. pymysql, flask_sqlalchemy, flask_script, flask_migrate
+2. 安装必要的python包：flask, pymysql, flask_sqlalchemy, flask_script, flask_migrate，bs4, requests等
 
 - 可以直接使用 **pip install -r requirements.txt** 安装环境
 
@@ -90,8 +90,16 @@ pip install -r requirements.txt
 - 整合系统，初步完成
 - 点赞功能
 
-todo
-分类完善-按分类查询 按分类提交
-审核
+2018.7.6
+- 审核功能
 
-关注
+todo
+- 页面跳转优化
+- 爬虫图片
+
+
+
+美化
+- 登录注册
+- 个人信息界面
+- 导航栏

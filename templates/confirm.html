@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}审核{% endblock %}
+    
+{% block head %}
+<link href="{{ url_for('static',filename='css/confirm.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+    <script>
+        function init() {
+
+            var card_list = document.getElementById("card-list");
+            var manage_box = document.getElementById("manage_box");
+
+            var card_list_height = card_list.offsetHeight;
+            var manage_box_height = manage_box.offsetHeight;
+            var browser_height = window.innerHeight;
+
+            if (card_list_height > browser_height) {
+                console.log("2.1");
+                document.getElementById("card-list").style.height = browser_height - 80 + "px";
+                console.log(document.getElementById("card-list").offsetHeight);
+            }
+            if (manage_box_height > browser_height) {
+                console.log("3");
+                document.getElementById("manage_box").style.height = browser_height - 96 + "px";
+            }
+        }
+        window.onload = init;
+    </script>
+{% endblock %}
+{% block main %}
+<div style="background-color: #f5f5f5">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{url_for('test')}}"><img class="logo" src="{{url_for('static',filename='images/logo.png')}}"></a>
+            </div>
+
+            <p id="nav-text" class="navbar-text">管理员审核界面</p>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="right">{{g.username}}</li>
+                <a href="{{url_for('logout')}}"  class="right">注销</a>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div id="outer_row" class="row">
+            <div id="card-list" class="col-md-4">
+                {% for news in newss %}
+                <div class="info-card container-fluid">
+                    <div class="text-row row">
+                        <div class="col-md-3 text-col">
+                            <p class="title">标题:</p>
+                        </div>
+                        <div class="col-md-9 content">
+                            <p class="text-content"><strong>{{news.title}}</strong></p>
+                        </div>
+                    </div>
+                    <div class="text-row row">
+                        <div class="col-md-3 text-col">
+                            <p class="title">简介:</p>
+                        </div>
+                        <div class="col-md-9 content">
+                            <p class="text-content">{{news.article}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-row row">
+                        <div class="col-md-3 text-col">
+                            <p class="title">作者:</p>
+                        </div>
+                        <div class="col-md-9 content">
+                            <p class="text-content">{{news.author}}</p>
+                        </div>
+                    </div>
+                    <div class="text-row row">
+                        <div class="col-md-3 text-col">
+                            <p class="title">上传时间:</p>
+                        </div>
+                        <div class="col-md-9 content">
+                            <p class="text-content">{{news.time}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+            <div id="manage_box" class="col-md-8 ">
+                {% if news_lenth %}
+                <div id="detail_info_card">
+                    <h4 id="detail_title">{{newss[0].title}}</h4>
+                    <p id="detail_info">{{newss[0].author}} {{newss[0].time}} {{newss[0].type}}</p>
+                    <p>{{newss[0].article}}</p>
+                </div>
+                <form action="{{url_for('confirm_upgrade')}}" method="POST">
+                    <input type="hidden" name="news_id" value="{{newss[0].pid}}">
+                    <button id="pass" class="btn btn-default" name="result" value="yes">通过</button>
+                    <button id="not_pass" class="btn btn-primer" name="result" value="no">不通过</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if news_lenth==0 %}
+
+    <p>暂无需要审核页面</p>
+
+    {% endif %}
+</div>
+
+{% endblock %}
