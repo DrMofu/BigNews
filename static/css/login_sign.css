@@ -1,7 +1,13 @@
 #body {
     background-color: #E0e0e0;
 }
-
+body{
+    /*background-color: #b4daf0;*/
+    /*background-image: url(../images/body_repeat.png);*/
+    /*background-repeat:repeat-x;*/
+    /*background-position: center 0;*/
+    /*background-color: #f7f7f7;*/
+}
 div.log-container {
     background-color: #FFFFFF;
     border-radius: 8px;

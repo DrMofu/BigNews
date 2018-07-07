@@ -9,6 +9,8 @@ import config
 import datetime
 import os
 from werkzeug.utils import secure_filename
+import crawler.run
+
 
 app = Flask(__name__)
 app.config.from_object(config)

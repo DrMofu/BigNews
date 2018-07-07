@@ -19,6 +19,7 @@
 {% endblock %}
 {% block main %}
     <!-- <div class="vacan"></div> -->
+    <!-- 首页 -->
     <div class="container">
         <div class="one">
             <div class="card">
@@ -43,6 +44,7 @@
             </div>
         </div>
     </div>
+    <!-- 瀑布流 -->
     <div class="container">
         <div id="mescroll" class="row masonry mescroll">
             {% for news in newss[1:] %}
@@ -58,7 +60,6 @@
                                 <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                             </a>
                         </div>
-
                         <div class="news-group">
                             <p class="news-title"><a href="{{url_for('newsPage',newsId=news.pid)}}">{{news.title}}</a></p>
                             <p class="news-content">{{news.article}}</p>
