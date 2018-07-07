@@ -6,11 +6,11 @@ import sqlite3
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-
+url = 'crawler/toutiao.sqlite'
 
 class JinritoutiaoPipeline(object):
     def open_spider(self, spider):
-        self.conn = sqlite3.connect('toutiao.sqlite')
+        self.conn = sqlite3.connect(url)
         self.c = self.conn.cursor()
         self.c.execute(r'create table if not exists toutiao(title text unique, article text, time text, type text, source text,author text, img text, likes integer default 0, url text, waitforcheck integer default 1, value integer default 0)')
 

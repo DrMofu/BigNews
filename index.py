@@ -3,13 +3,13 @@
 from flask import Flask,request,session,redirect,url_for,render_template,g
 from models import *
 from exts import db
-from crawler import *
+from crawl import *
+import crawler.run as crawler_news
 from decorators import *
 import config
 import datetime
 import os
 from werkzeug.utils import secure_filename
-import crawler.run
 
 
 app = Flask(__name__)
@@ -236,6 +236,28 @@ def crawler():
 		news.author_id = user.uid
 		db.session.add(news)
 		db.session.commit()
+	return 'finished'
+
+
+@app.route('/crawler_toutiao/')
+def crawler_toutiao():
+	return_list = crawler_news.get_toutiao()
+	for item in return_list:
+		print(item['time'])
+		news = News.query.filter(News.title == item['title']).first()
+		if news:
+			print('已经存在')
+			continue
+		news = News(title=item['title'],article=item['article'],time=item['time'],\
+			type=item['type'],source=item['source'],author=item['author'],\
+			waitforcheck=1,url=item['url'],picurl=item['img'])
+		username = news.author
+		user = create_credit_user(username) # 创建用户或查询用户
+		news.author_user = user # 绑定用户与新闻
+		news.author_id = user.uid
+		db.session.add(news)
+		db.session.commit()
+	
 	return 'finished'
 
 # 钩子函数

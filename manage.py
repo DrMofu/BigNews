@@ -6,6 +6,7 @@ from flask_migrate import Migrate,MigrateCommand
 from index import app
 from exts import db
 from models import *
+import crawler.run as cra
 
 manager = Manager(app)
 
@@ -19,7 +20,6 @@ manager.add_command('db',MigrateCommand)
 def test():
 	print("server start")
 
-	
 # 初始化几个系统用户
 @manager.command
 def init_user():
@@ -37,6 +37,10 @@ def init_user():
 		db.session.commit()
 	print("finished!")
 
+@manager.command
+def crawler():
+	cra.test()
+	print('finished')
 
 if __name__ == '__main__':
 	manager.run()
