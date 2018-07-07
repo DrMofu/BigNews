@@ -7,6 +7,7 @@ from crawler import *
 from decorators import *
 import config
 import datetime
+import crawler.run
 
 app = Flask(__name__)
 app.config.from_object(config)
