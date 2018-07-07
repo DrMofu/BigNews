@@ -5,7 +5,7 @@ from datetime import datetime
 class User(db.Model):
 	__tablename__ = 'user'
 	uid = db.Column(db.Integer,primary_key=True,autoincrement=True)
-	type = db.Column(db.Integer,nullable=False,default=1)  #  1 普通用户  2 认证用户  3 管理员
+	type = db.Column(db.Integer,nullable=False,default=1)  #  1 普通用户  2 认证用户  3 管理员  -1 审核不通过
 
 	username = db.Column(db.String(16),nullable=False)
 	password = db.Column(db.String(16),nullable=False)
