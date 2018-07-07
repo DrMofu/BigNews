@@ -52,6 +52,15 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="main">
+        <div class="flash-message container col-md-4 col-md-offset-4">
+            {% with messages=get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert" style="text-align: center;">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         {% block main %}{% endblock %}        
         <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
         <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
