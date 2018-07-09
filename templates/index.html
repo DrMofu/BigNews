@@ -55,7 +55,8 @@
                                 {% if news.picurl==None %}
                                     <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
                                 {% else %}
-                                    <img src="static/{{news.picurl}}" class="avatar" alt="">
+                                    <!-- <img src="static/{{news.picurl}}" class="avatar" alt=""> -->
+                                    <img src="{{news.picurl}}" class="avatar" alt="">
                                 {% endif %}
                                 <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                             </a>

@@ -6,7 +6,7 @@ from flask_migrate import Migrate,MigrateCommand
 from index import app
 from exts import db
 from models import *
-import crawler.run as cra
+import crawler.run as crawler_news
 
 manager = Manager(app)
 
@@ -39,9 +39,24 @@ def init_user():
 
 @manager.command
 def crawler():
-	cra.test()
-	print('finished')
-
+	crawler_news.run_crawl()
+	return_list = crawler_news.get_toutiao()
+	for item in return_list:
+		print(item['time'])
+		news = News.query.filter(News.title == item['title']).first()
+		if news:
+			print('已经存在')
+			continue
+		news = News(title=item['title'],article=item['article'],time=item['time'],\
+			type=item['type'],source=item['source'],author=item['author'],\
+			waitforcheck=1,url=item['url'],picurl=item['img'])
+		username = news.author
+		user = create_credit_user(username) # 创建用户或查询用户
+		news.author_user = user # 绑定用户与新闻
+		news.author_id = user.uid
+		db.session.add(news)
+		db.session.commit()
+	crawler_news.delete_database()
 if __name__ == '__main__':
 	manager.run()
 

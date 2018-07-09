@@ -12,7 +12,7 @@ class SinaHBSpider(scrapy.Spider):
             yield scrapy.Request(url, callback = self.parse_article)
 
     def parse_article(self, response):
-        article = '\n'.join(response.css('.article-body p::text').extract().strip().split())
+        article = '<br/>'.join(response.css('.article-body p::text').extract().strip().split())
         time = response.css('.source-time ::text').extract_first()
         time = " ".join(time.split())
         time = time + ':00'
