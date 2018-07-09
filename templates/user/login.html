@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block main %}   
-    <div class="container-fluid">
+    <div class="container-fluid" id="parent">
+        <div id="blur"></div>
+        <div id="clear"></div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 log-container">
                 <form  action="{{ url_for('login') }}" method="post">
@@ -45,4 +47,46 @@
         password_btn.onmousedown = showPassword;
         password_btn.onmouseup = hidePassword;
     </script>
+    <script>
+        function showPassword() {
+            var password_pic = document.getElementById("addon-pic");
+            password_pic.className = "glyphicon glyphicon-eye-open";
+            document.getElementById("with-button").type = "text";
+        }
+
+        function hidePassword() {
+            var password_pic = document.getElementById("addon-pic");
+            password_pic.className = "glyphicon glyphicon-eye-close";
+            document.getElementById("with-button").type = "password";
+        }
+        var password_btn = document.getElementById("addon-btn");
+        password_btn.onmousedown = showPassword;
+        password_btn.onmouseup = hidePassword;
+
+        // 实现模糊
+        function mouseMove(ev) {
+            ev = ev || window.event;
+            var mousePos = mouseCoords(ev);
+            document.getElementById("clear").style.top = mousePos.y - 900 + "px";
+            document.getElementById("clear").style.left = mousePos.x - 900 + "px";
+
+        }
+
+        function mouseCoords(ev) {
+            if (ev.pageX || ev.pageY) {
+                return {
+                    x: ev.pageX,
+                    y: ev.pageY
+                };
+            }
+            return {
+                x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y: ev.clientY + document.body.scrollTop - document.body.clientTop
+            };
+        }
+        document.onmousemove = mouseMove;
+    </script>
+
+
+
 {% endblock %}
