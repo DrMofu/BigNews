@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from flask import Flask,request,session,redirect,url_for,render_template,g
+from flask import Flask,request,session,redirect,url_for,render_template,g,flash
 from models import *
 from exts import db
 from crawl import *
@@ -17,6 +17,24 @@ app.config.from_object(config)
 db.init_app(app)
 
 # 对数据库建立，存储等操作在manage.py中进行
+
+# 校验注册过程
+def validateRegister(username,password1,password2):
+	user=User.query.filter(User.username==username).first()
+	if username==None:
+		return(u'请输入用户名')
+	else:
+		if user:
+			return(u'用户名已存在')
+		else:
+			if len(username)<4 or len(username)>16:
+				return(u'用户名长度应为4-16字符')
+			elif len(password1)<6 or len(password1)>12:
+				return(u'密码长度应为6-12字符')
+			elif password1 != password2:
+				return(u'两次密码不一致')
+			else:
+				return('SUCCESS')
 
 @app.route('/test/')
 def test():
@@ -79,18 +97,30 @@ def register():
 			password1 = request.form.get('password1')
 			password2 = request.form.get('password2')
 
-			user = User.query.filter(User.username == username).first()
-			if user:
-				return '该用户名已注册'
+			message=validateRegister(username,password1,password2)
+			if message=='SUCCESS':
+				nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
+				user = User(type=1,username=username,password=password1,signtime=nowTime)
+				db.session.add(user)
+				db.session.commit()
+				return redirect(url_for('login'))
 			else:
-				if password1!=password2:
-					return '两次密码不相符'
-				else:
-					nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
-					user = User(type=1,username=username,password=password1,signtime=nowTime)
-					db.session.add(user)
-					db.session.commit()
-					return redirect(url_for('login'))
+				flash(message)
+				return redirect(url_for('register'))
+
+			# user = User.query.filter(User.username == username).first()
+			# if user:
+			# 	return '该用户名已注册'
+			# else:
+			# 	if password1!=password2:
+			# 		return '两次密码不相符'
+			# 	else:
+			# 		nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
+			# 		user = User(type=1,username=username,password=password1,signtime=nowTime)
+			# 		db.session.add(user)
+			# 		db.session.commit()
+			# 		return redirect(url_for('login'))
+
 # logout 注销
 @app.route('/logout/')
 def logout():
