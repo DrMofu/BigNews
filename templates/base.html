@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}-Big News</title>
     <link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
-    <link href="{{ url_for('static',filename='css/base.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static',filename='css/base.css')}}" rel="stylesheet">    
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -28,7 +27,7 @@
         
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
-                <ul class="nav navbar-nav">
+                <ul id="table-left" class="nav navbar-nav">
                     <li><a href="{{url_for('index')}}">精选<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('catalogue')}}">时政<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('catalogue')}}">军事<span class="sr-only">(current)</span></a></li>
@@ -37,10 +36,11 @@
                     <li><a href="{{url_for('catalogue')}}">体育<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('catalogue')}}">娱乐<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('release')}}">编辑新闻</a></li>
+                    <li class="underline"></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if username %}
-                        <li><a href="{{url_for('user_info',username=username)}}">{{username}}</a></li>
+                        <li><a href="{{url_for('user')}}">{{username}}</a></li>
                         <li><a href="{{url_for('logout')}}">注销</a></li>
                     {% else %}
                         <li><a href="{{url_for('login')}}">登录</a></li>
@@ -52,7 +52,16 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="main">
-        {% block main %}{% endblock %}
+        <div class="flash-message container col-md-4 col-md-offset-4">
+            {% with messages=get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert" style="text-align: center;">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% block main %}{% endblock %}        
         <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
         <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
         {% block script %}{% endblock %}

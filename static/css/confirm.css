@@ -1,0 +1,135 @@
+/*导航栏*/
+
+.navbar-default {
+    height: 80px;
+}
+
+.container {
+    height: 100%
+}
+
+#nav-text {
+    border-left: 1px solid #E0E0E0;
+    padding-left: 24px;
+    line-height: 80px;
+    margin: 0px;
+    height: 100%;
+    font-size: 24px;
+    color: #000000;
+}
+
+.logo {
+    height: 40px;
+    margin-top:10px; 
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.right {
+    line-height: 80px;
+    margin-left: 24px;
+    font-size: 20px;
+    color: #757575;
+}
+
+
+/*左边*/
+
+#outer_row {
+    margin-top: 80px;
+    padding: 0px 32px;
+}
+
+#card-list {
+    /*background-color: #ffffff;*/
+    padding: 0px;
+    overflow: auto;
+}
+
+.info-card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    box-shadow: 3px 2px 5px #dddddd;
+    width: 100%;
+    padding: 16px 16px 4px 16px;
+    margin: 12px 0px;
+}
+
+.text-row {
+    margin: 0px 0px 8px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.text-col {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 8px 0px 0px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+    margin: 0px;
+}
+
+.content {
+    margin: 0px;
+    padding: 0px;
+}
+
+.text-content {
+    margin: 0px;
+}
+
+
+/*接下来是右边的*/
+
+#manage_box {
+    margin-top: 8px;
+    padding: 0px 32px 0px 22px;
+    overflow: auto;
+}
+
+#detail_info_card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 3px 2px 5px #dddddd;
+    margin-top: 4px;
+    min-height: 350px;
+    padding: 24px;
+}
+
+#detail_title {
+    font-weight: bold;
+    margin: 0px 0px 16px 0px;
+}
+
+#detail_info {
+    margin: 0px 0px 24px 0px;
+}
+
+#pass {
+    float: right;
+    margin-top: 24px;
+    background-color: #e71c23;
+    color: #ffffff;
+    border: 0px;
+    width: 183px;
+    height: 34px;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1;
+}
+
+#not_pass {
+    float: right;
+    margin-top: 24px;
+    margin-right: 24px;
+    background-color: #ffffff;
+    border: 0px;
+    width: 183px;
+    height: 34px;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1;
+}

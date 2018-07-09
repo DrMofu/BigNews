@@ -33,6 +33,6 @@ def crawler_36kr():
 				desc = item['description']
 		news = News(title=title,article=desc,time=time,
 				type='科技',source=source,author=source,likes=0,
-				url=url,waitforcheck=1,value=0)					
+				url=url,waitforcheck=1,value=0)	
 		return_list.append(news)
 	return return_list

@@ -3,27 +3,34 @@
 {% block title %}条目{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">  
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
-{% block script %}
-    <script type="text/javascript" src="{{url_for('static',filename='js/masonry.pkgd.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='js/imagesloaded.pkgd.min.js')}}" ></script>
-    <script>
-        $('.masonry').imagesLoaded(function() {
-            $('.masonry').masonry({
-                itemSelector: '.item'
-            });
+
+{% block script %}      
+<script type="text/javascript" src="{{url_for('static',filename='js/masonry.pkgd.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/imagesloaded.pkgd.min.js')}}" ></script>
+<script>
+    $('.masonry').imagesLoaded(function() {
+        $('.masonry').masonry({
+            itemSelector: '.item'
         });
-    </script>
+    });
+</script>
 {% endblock %}
 {% block main %}
-    <div class="vacan"></div>
+    <!-- <div class="vacan"></div> -->
+    <!-- 首页 -->
     <div class="container">
         <div class="one">
             <div class="card">
                 <div class="avatar-group">
                     <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
-                        <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        {% if newss[0].picurl==None %}
+                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                        {% else %}
+                            <img src="static/{{newss[0].picurl}}" class="avatar" alt="">
+                        {% endif %}
+                        <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                     </a>
                 </div>
                 <div class="news-group">
@@ -36,13 +43,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!-- 瀑布流 -->
+    <div class="container">
         <div id="mescroll" class="row masonry mescroll">
             {% for news in newss[1:] %}
                 <div class="col-md-4 item">
                     <div class="card">
                         <div class="avatar-group">
                             <a href="{{url_for('newsPage',newsId=news.pid)}}">
-                                <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                {% if news.picurl==None %}
+                                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                {% else %}
+                                    <img src="static/{{news.picurl}}" class="avatar" alt="">
+                                {% endif %}
+                                <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                             </a>
                         </div>
                         <div class="news-group">
@@ -53,8 +68,8 @@
                                 <span class="news-time">{{news.time}}</span>
                             </div>
                         </div>
-                    </div>
-                </div>  
+                    </div> 
+                </div> 
             {% endfor %}
         </div>
     </div>

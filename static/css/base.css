@@ -40,3 +40,87 @@ body{
         border: none;
     }
 }
+
+/* table-left在这里用到了 */
+
+#table-left {
+    border-left: 1px solid #e0e0e0;
+    position: relative;
+    float: left;
+}
+
+
+/* 以下都是对下滑条underline元素的设置 */
+
+#table-left a:hover {
+    color: #d01716;
+}
+
+li.underline {
+    height: 4px;
+    width: 12%;
+    border-top: 4px solid #d01716;
+    position: absolute;
+    left: 0px;
+    top: 46px;
+    transition-property: width left;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    -webkit-transition-property: width left;
+    -webkit-transition-duration: .2s;
+    -webkit-transition-timing-function: ease-in-out;
+    -webkit-transition-delay: 0s;
+    /*chrome和safari*/
+    -moz-transition-property: width left;
+    -moz-transition-duration: .2s;
+    -moz-transition-timing-function: ease-in-out;
+    -moz-transition-delay: 0s;
+    /*firefox*/
+    -o-transition-property: width left;
+    -o-transition-duration: .2s;
+    -o-transition-timing-function: ease-in-out;
+    -o-transition-delay: 0s;
+    /*opera*/
+}
+
+li:nth-child(1):hover~.underline {
+    /*li元素的父元素的第一个子元素,当鼠标停留其上时,move元素的left属性改变*/
+    width: 12%;
+    left: 0;
+}
+
+li:nth-child(2):hover~.underline {
+    width: 12%;
+    left: 12%;
+}
+
+li:nth-child(3):hover~.underline {
+    width: 12%;
+    left: 24%;
+}
+
+li:nth-child(4):hover~.underline {
+    width: 12%;
+    left: 36%;
+}
+
+li:nth-child(5):hover~.underline {
+    width: 12%;
+    left: 48%;
+}
+
+li:nth-child(6):hover~.underline {
+    width: 12%;
+    left:60%;
+}
+
+li:nth-child(7):hover~.underline {
+    width: 12%;
+    left: 72%;
+}
+
+li:nth-child(8):hover~.underline {
+    width: 16%;
+    left: 84%;
+}

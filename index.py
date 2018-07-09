@@ -1,18 +1,40 @@
 # -*- coding: UTF-8 -*-
 
-from flask import Flask,request,session,redirect,url_for,render_template,g
+from flask import Flask,request,session,redirect,url_for,render_template,g,flash
 from models import *
 from exts import db
 from crawler import *
 from decorators import *
 import config
 import datetime
+import os
+from werkzeug.utils import secure_filename
+import crawler.run
+
 
 app = Flask(__name__)
 app.config.from_object(config)
 db.init_app(app)
 
 # 对数据库建立，存储等操作在manage.py中进行
+
+# 校验注册过程
+def validateRegister(username,password1,password2):
+	user=User.query.filter(User.username==username).first()
+	if username==None:
+		return(u'请输入用户名')
+	else:
+		if user:
+			return(u'用户名已存在')
+		else:
+			if len(username)<4 or len(username)>16:
+				return(u'用户名长度应为4-16字符')
+			elif len(password1)<6 or len(password1)>12:
+				return(u'密码长度应为6-12字符')
+			elif password1 != password2:
+				return(u'两次密码不一致')
+			else:
+				return('SUCCESS')
 
 @app.route('/test/')
 def test():
@@ -21,9 +43,8 @@ def test():
 @app.route('/')
 def index():
 	content = {
-		'newss' : News.query.order_by('-time').limit(20).all()
+		'newss' : News.query.filter(News.waitforcheck > 0).order_by('-time').limit(20).all()
 	}
-
 	return render_template('main.html',**content)
 
 @app.route('/catalogue')
@@ -36,11 +57,13 @@ def catalogue():
 
 # user模块
 '''
-login      --  登录+注册页
+login      --  登录
+register   --  注册
+logout     --  登出
 user       --  个人信息页
 user_info  --  他人信息页
 '''
-
+ 
 # login 登录
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
@@ -74,18 +97,30 @@ def register():
 			password1 = request.form.get('password1')
 			password2 = request.form.get('password2')
 
-			user = User.query.filter(User.username == username).first()
-			if user:
-				return '该用户名已注册'
+			message=validateRegister(username,password1,password2)
+			if message=='SUCCESS':
+				nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
+				user = User(type=1,username=username,password=password1,signtime=nowTime)
+				db.session.add(user)
+				db.session.commit()
+				return redirect(url_for('login'))
 			else:
-				if password1!=password2:
-					return '两次密码不相符'
-				else:
-					nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
-					user = User(type=1,username=username,password=password1,signtime=nowTime)
-					db.session.add(user)
-					db.session.commit()
-					return redirect(url_for('login'))
+				flash(message)
+				return redirect(url_for('register'))
+
+			# user = User.query.filter(User.username == username).first()
+			# if user:
+			# 	return '该用户名已注册'
+			# else:
+			# 	if password1!=password2:
+			# 		return '两次密码不相符'
+			# 	else:
+			# 		nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
+			# 		user = User(type=1,username=username,password=password1,signtime=nowTime)
+			# 		db.session.add(user)
+			# 		db.session.commit()
+			# 		return redirect(url_for('login'))
+
 # logout 注销
 @app.route('/logout/')
 def logout():
@@ -97,7 +132,7 @@ def logout():
 @app.route('/user/')
 def user():
 	if hasattr(g,'username'):
-		return g.username
+		return render_template('/user/info.html')
 	else:
 		return redirect(url_for('login'))
 
@@ -106,6 +141,14 @@ def user():
 def user_info(username):
 	return username
 
+# 新闻模块
+'''
+release      --  发布文章
+newsPage     --  新闻页面
+news_confirm --  新闻审核
+add_comment  --  用户添加评论
+change_like  --  用户点赞
+'''
 
 # release 发布文章模块
 @app.route('/release/', methods = ['GET', 'POST'])
@@ -117,8 +160,15 @@ def release():
 		title = request.form.get('title')
 		content = request.form.get('content')
 		type = request.form.get('type')
+
+		pic=request.files['pic']
+		basepath=os.path.abspath(os.path.dirname(__file__))
+		upload_path=os.path.join(basepath,'static/images/news',secure_filename(pic.filename))
+		pic.save(upload_path)
+		picurl=os.path.join('images/news',secure_filename(pic.filename))
+
 		user = User.query.filter(User.username == g.username).first()
-		news = News(title=title,article=content,type=type,source='用户发布',author=g.username,waitforcheck=0)
+		news = News(title=title,article=content,type=type,source='用户发布',picurl=picurl,author=g.username,waitforcheck=0)
 		news.author_user = user
 		news.author_id = user.uid
 
@@ -136,6 +186,34 @@ def newsPage(newsId):
 	if hasattr(g,'uid'):
 		likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
 	return render_template('news.html',news=news,likes=likes)
+
+
+# news_confirm 新闻审核
+@app.route('/confirm/')
+@admin_required
+def news_confirm():
+	news = News.query.filter(News.waitforcheck == 0).order_by('-time').limit(8).all()
+	news_lenth = len(news)
+	content = {
+		'newss' : news,
+		'news_lenth' : news_lenth
+	}
+
+	return render_template('confirm.html',**content)
+
+@app.route('/confirm/upgrade/', methods=['POST'])
+@admin_required
+def confirm_upgrade():
+	news_id = request.form.get('news_id')
+	result = request.form.get('result')
+	news = News.query.filter(News.pid == news_id).first()
+	if result == 'yes':
+		news.waitforcheck=2 # 管理员审核通过
+	else:
+		news.waitforcheck=-1 # 管理员审核不通过
+	db.session.commit()
+	return redirect(url_for('news_confirm'))
+
 
 
 # add_comment 添加评论

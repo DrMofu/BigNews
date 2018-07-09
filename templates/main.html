@@ -21,7 +21,12 @@
     <div class="headline">
         <div class="headline-img">
             <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
-                <img src="{{url_for('static',filename='images/newsmain.jpg')}}" alt="">
+                {% if newss[0].picurl==None %}
+                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                {% else %}
+                    <img src="static/{{newss[0].picurl}}" class="avatar" alt="">
+                {% endif %}
+                <!-- <img src="{{url_for('static',filename='images/newsmain.jpg')}}" alt=""> -->
             </a>
         </div>
         <div class="headline-card">
@@ -40,7 +45,12 @@
                     <div class="card">
                         <div class="avatar-group">
                             <a href="{{url_for('newsPage',newsId=news.pid)}}">
-                                <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                {% if news.picurl==None %}
+                                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                {% else %}
+                                    <img src="static/{{news.picurl}}" class="avatar" alt="">
+                                {% endif %}
+                                <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
                             </a>
                         </div>
                         <div class="news-group">
