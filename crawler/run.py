@@ -1,14 +1,26 @@
+from twisted.internet import reactor, defer
 from scrapy.utils.project import get_project_settings
-from scrapy.crawler import CrawlerProcess
+from scrapy.crawler import CrawlerRunner
 import sqlite3
+from jinritoutiao import spiders
 
-url = 'crawler/toutiao.sqlite'
 
+@defer.inlineCallbacks
+def crawl():
+    runner = CrawlerRunner(get_project_settings())
+    yield runner.crawl(spiders.sina_hb.SinaHBSpider)
+    yield runner.crawl(spiders.sina_mil.SinaMILSpider)
+    yield runner.crawl(spiders.sina_travel.SinaTravelSpider)
+    yield runner.crawl(spiders.sina_sports.SinaSportsSpider)
+    yield runner.crawl(spiders.sina_finance.SinaFinanceSpider)
+
+    reactor.stop()
+    
 def run_crawl():
-    process = CrawlerProcess(get_project_settings())
-    process.crawl('sina_hb')
-    # process.crawl('sina_mil')
-    process.start()
+    crawl()
+    reactor.run()
+
+url = 'toutiao.sqlite'
 
 def get_toutiao():
     # conn = sqlite3.connect('crawler/toutiao.sqlite')

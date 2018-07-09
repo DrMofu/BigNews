@@ -135,11 +135,10 @@ def logout():
 
 # user 个人信息页
 @app.route('/user/')
+@login_required
 def user():
-	if hasattr(g,'username'):
-		return render_template('/user/info.html')
-	else:
-		return redirect(url_for('login'))
+	user = User.query.filter(User.username==g.username).first()
+	return render_template('/user/info.html',user=user)
 
 # user_info 他人信息页
 @app.route('/user/<username>')
