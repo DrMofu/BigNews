@@ -18,7 +18,7 @@
                         <input id="with-button" type="password" class="form-control" placeholder="密码"  name="password">
                         <span class="input-group-addon">
                             <button id="addon-btn" class="btn" type="button">
-                                <span id="addon-pic" class="glyphicon glyphicon-eye-open" alt="显示密码">
+                                <span id="addon-pic" class="glyphicon glyphicon-eye-close" alt="显示密码">
                             </button>
                         </span>
                     </div>
@@ -29,4 +29,20 @@
             </div>
         </div>
     </div>
+    <script>
+        function showPassword() {
+            var password_pic = document.getElementById("addon-pic");
+            password_pic.className = "glyphicon glyphicon-eye-open";
+            document.getElementById("with-button").type = "text";
+        }
+    
+        function hidePassword() {
+            var password_pic = document.getElementById("addon-pic");
+            password_pic.className = "glyphicon glyphicon-eye-close";
+            document.getElementById("with-button").type = "password";
+        }
+        var password_btn = document.getElementById("addon-btn");
+        password_btn.onmousedown = showPassword;
+        password_btn.onmouseup = hidePassword;
+    </script>
 {% endblock %}

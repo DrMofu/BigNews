@@ -3,7 +3,7 @@
 from flask import Flask,request,session,redirect,url_for,render_template,g,flash
 from models import *
 from exts import db
-from crawler import *
+from crawl import *
 from decorators import *
 import config
 import datetime
@@ -21,7 +21,7 @@ db.init_app(app)
 # 校验注册过程
 def validateRegister(username,password1,password2):
 	user=User.query.filter(User.username==username).first()
-	if username==None:
+	if username=='':
 		return(u'请输入用户名')
 	else:
 		if user:
@@ -68,7 +68,7 @@ user_info  --  他人信息页
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
 	if hasattr(g,'username'):
-		return '已处在登录状态，不可登录'
+		return redirect(url_for('index'))
 	else:
 		if request.method == 'GET':
 			return render_template('/user/login.html')
@@ -82,7 +82,8 @@ def login():
 				# session.permanent = True
 				return redirect(url_for('index'))
 			else:
-				return '登录错误'
+				flash(u'用户名或密码错误')
+				return redirect(url_for('login'))
 			
 # register 注册
 @app.route('/register/', methods = ['GET', 'POST'])

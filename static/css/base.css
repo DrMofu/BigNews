@@ -24,10 +24,14 @@ body{
     background:rgba(255,255,255,0.72);
     border: none;
 }
+.navbar-nav li a{
+    font-size: 16px;
+    font-weight: bold;   
+}
 @media screen and (max-width: 1000px) and (min-width:500px){
     .navbar-nav li a{
         padding-left: 0;
-        padding-right: 0;
+        padding-right: 0;        
     }
     #navi{
         background:rgba(255,255,255);
@@ -62,7 +66,7 @@ li.underline {
     border-top: 4px solid #d01716;
     position: absolute;
     left: 0px;
-    top: 46px;
+    top: 48px;
     transition-property: width left;
     transition-duration: .2s;
     transition-timing-function: ease-in-out;
