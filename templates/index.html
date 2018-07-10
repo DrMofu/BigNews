@@ -23,7 +23,7 @@
     <div class="container">
         <div class="one">
             <div class="card">
-                <div class="avatar-group">
+                <div id="first-avatar" class="avatar-group">
                     <a href="{{url_for('newsPage',newsId=newss[0].pid)}}">
                         {% if newss[0].picurl==None %}
                             <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">

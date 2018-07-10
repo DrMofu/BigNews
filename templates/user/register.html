@@ -16,6 +16,15 @@
                     <!-- <input type="password" class="form-control" placeholder="邮箱"> -->
                     <input type="password" class="form-control" placeholder="密码(6-12字符 只能包含字母和数字)" name="password1">
                     <input type="password" class="form-control" placeholder="确认密码" name="password2">
+                    <div class="flash-message" style="margin: 0 auto;position: relative;bottom:-25px;z-index: 100;">
+                        {% with messages=get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert" style="margin: 0 auto;text-align: center;"><p style="text-align: center;">{{message}}</p></div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
                     <button class="btn btn-default btn-block" type="submit" value="注册">注册</button>
                 </form>
             </div>
