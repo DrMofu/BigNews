@@ -7,15 +7,15 @@
 {% endblock %}
 
 {% block main %}   
-    <div class="container-fluid" id="parent">
+    <div class="container-fluid" id="parent"  >
         <div id="blur"></div>
         <div id="clear"></div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 log-container">
                 <form  action="{{ url_for('login') }}" method="post">
-                    <h2 class="title">登录</h2>
+                    <h2 class="title">登  录</h2>
 
-                    <input type="text" class="form-control" placeholder="用户名/邮箱" name="username">
+                    <input id="email_input" type="text" class="form-control" placeholder="用户名/邮箱" name="username">
                     <div class="input-group" style="margin-top:20px;">
                         <input id="with-button" type="password" class="form-control" placeholder="密码"  name="password">
                         <span class="input-group-addon">
@@ -34,27 +34,12 @@
                             {% endif %}
                         {% endwith %}
                     </div>
-                    <button class="btn btn-default btn-block" type="submit">登录</button>
+                    <button id="login_btn" class="btn btn-default btn-block" type="submit">登 录</button>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-        function showPassword() {
-            var password_pic = document.getElementById("addon-pic");
-            password_pic.className = "glyphicon glyphicon-eye-open";
-            document.getElementById("with-button").type = "text";
-        }
     
-        function hidePassword() {
-            var password_pic = document.getElementById("addon-pic");
-            password_pic.className = "glyphicon glyphicon-eye-close";
-            document.getElementById("with-button").type = "password";
-        }
-        var password_btn = document.getElementById("addon-btn");
-        password_btn.onmousedown = showPassword;
-        password_btn.onmouseup = hidePassword;
-    </script>
     <script>
         function showPassword() {
             var password_pic = document.getElementById("addon-pic");
@@ -71,6 +56,12 @@
         password_btn.onmousedown = showPassword;
         password_btn.onmouseup = hidePassword;
 
+        //鼠标离开窗口时效果消失
+        function mouseOut() {
+            document.getElementById("clear").style.top = -200 + "px";
+            document.getElementById("clear").style.left = -200 + "px";
+
+        }
         // 实现模糊
         function mouseMove(ev) {
             ev = ev || window.event;
@@ -78,8 +69,8 @@
             // setTimeout(function(){document.getElementById("clear").style.top = mousePos.y - 900 + "px";},100)
             // setTimeout(function(){document.getElementById("clear").style.left = mousePos.x - 900 + "px";},100)
 
-            document.getElementById("clear").style.top = mousePos.y - 900 + "px";
-            document.getElementById("clear").style.left = mousePos.x - 900 + "px";
+            document.getElementById("clear").style.top = mousePos.y - 500 + "px";
+            document.getElementById("clear").style.left = mousePos.x - 500 + "px";
 
         }
 
@@ -96,6 +87,8 @@
             };
         }
         document.onmousemove = mouseMove;
+        document.onmouseout = mouseOut;
+
     </script>
 
 

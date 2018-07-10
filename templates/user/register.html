@@ -7,11 +7,15 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-fluid">
+    <div class="container-fluid"  id="parent">
+
+        <div id="blur"></div>
+        <div id="clear"></div>
+
         <div class="row">
             <div class="col-md-4 col-md-offset-4 log-container">
                 <form action="{{ url_for('register') }}" method="post">
-                    <h2 class="title">注册</h2>
+                    <h2 class="title">注  册</h2>
                     <input type="text" class="form-control" placeholder="用户名(4-16字符 只能包含汉字和字母)"  name="username">
                     <!-- <input type="password" class="form-control" placeholder="邮箱"> -->
                     <input type="password" class="form-control" placeholder="密码(6-12字符 只能包含字母和数字)" name="password1">
@@ -25,9 +29,49 @@
                             {% endif %}
                         {% endwith %}
                     </div>
-                    <button class="btn btn-default btn-block" type="submit" value="注册">注册</button>
+                    <button id="signin_btn" class="btn btn-default btn-block" type="submit" value="注册">注 册</button>
                 </form>
             </div>
         </div>
+
+        <script>
+        
+                //鼠标离开窗口时效果消失
+                function mouseOut() {
+                    document.getElementById("clear").style.top = -20000 + "px";
+                    document.getElementById("clear").style.left = -20000 + "px";
+        
+                }
+                // 实现模糊
+                function mouseMove(ev) {
+                    ev = ev || window.event;
+                    var mousePos = mouseCoords(ev);
+                    // setTimeout(function(){document.getElementById("clear").style.top = mousePos.y - 900 + "px";},100)
+                    // setTimeout(function(){document.getElementById("clear").style.left = mousePos.x - 900 + "px";},100)
+                    console.log(mousePos.x);
+                    console.log(mousePos.y);
+                    console.log(" ");
+
+                    document.getElementById("clear").style.top = mousePos.y - 500 + "px";
+                    document.getElementById("clear").style.left = mousePos.x - 500 + "px";
+        
+                }
+        
+                function mouseCoords(ev) {
+                    if (ev.pageX || ev.pageY) {
+                        return {
+                            x: ev.pageX,
+                            y: ev.pageY
+                        };
+                    }
+                    return {
+                        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                        y: ev.clientY + document.body.scrollTop - document.body.clientTop
+                    };
+                }
+                document.onmousemove = mouseMove;
+                document.onmouseout = mouseOut;
+        
+            </script>
     </div>
 {% endblock %}
