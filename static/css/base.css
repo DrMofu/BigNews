@@ -1,3 +1,10 @@
+.back_to_top{
+    position: fixed;
+    width: 50px;
+    bottom:30px;
+    right: 30px;
+    cursor: pointer;
+}
 .logo{
     height: 30px;
     display: inline-block;
@@ -12,7 +19,7 @@
     overflow: hidden;
 }
 .vacan{
-    height: 60px;
+    height: 10px;
 }
 body{
     background-color: #f3f3f3;
@@ -24,20 +31,39 @@ body{
     background:rgba(255,255,255,0.72);
     border: none;
 }
+.navbar-nav li a{
+    font-size: 16px;
+    font-weight: bold;   
+}
+.login-regist li{
+    padding-right: 0;
+}
+.login-regist li a{
+    padding-right: 0;
+}
+ul#table-left li a{
+    color: #424242;
+}
 @media screen and (max-width: 1000px) and (min-width:500px){
     .navbar-nav li a{
         padding-left: 0;
-        padding-right: 0;
+        padding-right: 0;        
     }
     #navi{
         background:rgba(255,255,255);
         border: none;
+    }
+    li.underline{
+        display: none;
     }
 }
 @media screen and (max-width: 500px){
     #navi{
         background:rgba(255,255,255);
         border: none;
+    }
+    li.underline{
+        display: none;
     }
 }
 
@@ -53,16 +79,16 @@ body{
 /* 以下都是对下滑条underline元素的设置 */
 
 #table-left a:hover {
-    color: #d01716;
+    color: #e51c23;
 }
 
 li.underline {
     height: 4px;
     width: 12%;
-    border-top: 4px solid #d01716;
+    border-top: 4px solid #e51c23;
     position: absolute;
     left: 0px;
-    top: 46px;
+    top: 48px;
     transition-property: width left;
     transition-duration: .2s;
     transition-timing-function: ease-in-out;

@@ -1,3 +1,37 @@
+/* 模糊效果 */
+
+#parent {
+    background: url("../images/bg-login.jpg") fixed;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#blur {
+    background: inherit;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -200;
+}
+
+#clear {
+    width: 1800px;
+    height: 1800px;
+    border-radius: 900px;
+    /* 12 */
+    background: inherit;
+    -webkit-filter: blur(1px);
+    filter: brightness(2.0);
+    /* 34 */
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    z-index: -100;
+}
+
 #body {
     background-color: #E0e0e0;
 }
@@ -13,6 +47,7 @@ div.log-container {
     border-radius: 8px;
     padding: 38px 47px 55px 47px;
     margin-top: 5%;
+    z-index: 10;
 }
 
 .title {
