@@ -13,7 +13,7 @@
     <div class="row" id="title_box">
         <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
             <div class="type_table">
-                <a href="{{url_for('catalogue')}}">
+                <a href="{{url_for('catalogue',kind=news.type)}}">
                     <button class="type">{{ news.type }}</button>
                 </a>
             </div>
@@ -51,16 +51,18 @@
     <div class="row" id="content_box">
         <!--发布者信息-->
         <div class="col-sm-3 col-sm-offset-1 hidden-xs col-md-2 col-md-offset-1">
-            <div  id="author_box">
-                <div class="row" id="author_img">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <img src="{{ url_for('static',filename = news.author_user.picurl )}}" alt="作者图片" class="img-circle img-responsive">
+            <div id="author_box">
+                <a href="{{url_for('user_info',username = news.author_user.username)}}" >
+                    <div class="row" id="author_img">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <img src="{{ url_for('static',filename = news.author_user.picurl )}}" alt="作者图片" class="img-circle img-responsive">
+                        </div>
                     </div>
-                </div>
-                <div id="author_msg">
-                    <p id="author_name">{{ news.author_user.username }}</p>
-                    <p id="author_desc">{{ news.author_user.describe }}</p>
-                </div>
+                    <div id="author_msg">
+                        <p id="author_name">{{ news.author_user.username }}</p>
+                        <p id="author_desc">{{ news.author_user.describe }}</p>
+                    </div>
+                </a>
                 <div id="follow_box">
                     + 关注
                 </div>
@@ -68,10 +70,11 @@
         </div>
         <!--正文信息-->
         <div class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-0 col-md-8" id="text_box">
-            <p>{{ news.article }}</p>
+            {{ news.article | safe }}
         </div>
         <!--手机界面下发布者信息-->
         <div class="col-xs-8 col-xs-offset-2 visible-xs" id="author_box_xs">
+            <a href="{{url_for('user_info',username = news.author_user.username)}}" >
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-1">
                     <img src="{{ url_for('static',filename = news.author_user.picurl )}}" alt="作者图片" class="img-circle img-responsive"  id="author_img_xs">
@@ -85,6 +88,7 @@
                     <p id="author_desc_xs">{{ news.author_user.describe }}</p>
                 </div>
             </div>
+            </a>
         </div>
         <!-- 点赞 -->
         <div class="col-xs-12 like_button_box">                
@@ -116,7 +120,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="my_comment_div" class="col-xs-12" style="padding-bottom: 10px;">
+        <div id="my_comment_div" class="col-xs-12 col-sm-10 col-sm-offset-1" style="padding-bottom: 10px;">
             <!--个人评论框-->
             <div class="row">
                 <div id="my_comment_box" class="col-md-10 col-md-offset-1">
@@ -139,11 +143,13 @@
             <!--一条用户评论-->
             <div class="row user_box">
                 <hr/>
-                <div class="col-xs-3 col-sm-2 col-sm-offset-1 user_img">
-                    <img src="{{ url_for('static',filename = comment.user.picurl )}}" alt="用户头像" class="img-circle img-responsive change_img">
-                </div>
+                <a href="{{url_for('user_info',username = comment.user.username)}}">
+                    <div class="col-xs-3 col-sm-2 col-sm-offset-1 user_img">
+                        <img src="{{ url_for('static',filename = comment.user.picurl )}}" alt="用户头像" class="img-circle img-responsive change_img">
+                    </div>
+                </a>
                 <div class="col-xs-9 col-sm-8">
-                    <p class="user_name">{{comment.user.username}}</p>
+                    <a class="user_name" href="{{url_for('user_info',username = comment.user.username)}}">{{comment.user.username}}</a>
                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                     <p class="user_time">{{comment.time}}</p>
                     <p class="user_content">{{comment.comment}}</p>

@@ -318,7 +318,7 @@ p{
     }
 
     #text_box{
-        text-indent: 16px;
+        /*text-indent: 16px;*/
         padding: 0% 4%;
         margin-bottom: 5%;
     }
