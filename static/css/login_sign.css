@@ -1,10 +1,13 @@
 /* 模糊效果 */
 
 #parent {
-    background: url("../images/bg-login.jpg") fixed;
+    background: url("../images/bg6.jpg") fixed;
+    background-size: cover;
     height: 100%;
     width: 100%;
+    padding: 0px;
     position: relative;
+    cursor: none;
 }
 
 #blur {
@@ -18,22 +21,23 @@
 }
 
 #clear {
-    width: 1800px;
-    height: 1800px;
-    border-radius: 900px;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 500px;
     /* 12 */
     background: inherit;
-    -webkit-filter: blur(1px);
-    filter: brightness(2.0);
+    filter: brightness(1.1);
     /* 34 */
     position: absolute;
     z-index: 1;
 }
 
 /* 其他元素 */
-body {
+
+
+/* 登录输入框 */
+body{
     overflow:hidden;
-    height: 100%;
 }
 
 div.log-container {
@@ -41,8 +45,9 @@ div.log-container {
     border-radius: 8px;
     padding: 38px 47px 55px 47px;
     margin-top: 5%;
-    margin-bottom:30%;
-    z-index: 10;
+    margin-bottom:800px;
+    z-index: 2;
+    cursor: default;
 }
 
 .title {
@@ -51,18 +56,95 @@ div.log-container {
     text-align: center;
 }
 
+#email_input {
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+#email_input:hover {
+    box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* 密码输入栏 */
+
 input.form-control {
     padding: 17px 12px 17px 12px;
     margin-top: 20px;
     margin-bottom: 5px;
     height: 52px;
     font-size: 16px;
+    border: #bdbdbd solid 0.3px;
+    box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
 }
+
+input.form-control:hover{
+    box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+#with-button {
+    /* box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.16), -0.5px 0 0 0.5px rgba(0, 0, 0, 0.08); */
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    margin: 0px;
+    border-right: 0px;
+}
+
+#with-button:hover {
+    /* box-shadow: -4px 3px 8px -4px rgba(0, 0, 0, 0.2), -0.5px 0 0 0.5px rgba(0, 0, 0, 0.08); */
+    box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+ ::-webkit-input-placeholder {
+    font-size: 16px;
+}
+
+
+/* 密码输入栏上的按钮 */
+
+span.input-group-addon {
+    padding: 0px;
+    background-color: #FFFFFF;
+    margin-top: 20px;
+    height: 52px;
+    vertical-align: center;
+    border: #bdbdbd solid 0.3px;
+    /* box-shadow: 1px 2px 2px -1px rgba(0, 0, 0, 0.16), 0.5px 0 0 0.5px rgba(0, 0, 0, 0.08); */
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+span.input-group-addon:hover {
+    /* box-shadow: 4px 3px 8px -4px rgba(0, 0, 0, 0.2), 0.5px 0 0 0.5px rgba(0, 0, 0, 0.08); */
+    box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+#addon-btn {
+    background-color: #FFFFFF;
+    height: 98%;
+    /* border-right: #bdbdbd solid 0.5px; */
+    padding: 0px 12px;
+}
+
+#addon-btn:focus {
+    outline: none;
+}
+
+#addon-btn:active {
+    outline: none;
+}
+
+#addon-pic {
+    vertical-align: middle;
+    display: inline;
+    padding: 0px;
+}
+
+
+/* 两个按钮 */
 
 button.btn-link {
     float: right;
     padding: 0px;
     border: 0px;
+    margin: 1%;
     color: #757575;
 }
 
@@ -73,33 +155,40 @@ button.btn-block {
     padding-bottom: 13px;
     line-height: 1;
     font-size: 20px;
+    border: #bdbdbd solid 0.3px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
- ::-webkit-input-placeholder {
-    font-size: 16px;
+button#login_btn:hover {
+    background-color: #f36c60;
+    color: #FFFFFF;
+    outline: none;
 }
 
-.input-group-addon {
-    padding: 0px;
-    background-color: #FFFFFF;
+button#login_btn:active {
+    border: 0px;
+    background-color: #e51c23;
+    color: #FFFFFF;
+    outline: none;
 }
 
-#with-button {
-    margin: 0px;
-    border-right: 0px;
+button#login_btn:focus {
+    outline: none;
 }
 
-#addon-btn {
-    background-color: #FFFFFF;
-    padding: 0px 12px;
+button#signin_btn:hover {
+    background-color: #f36c60;
+    color: #FFFFFF;
+    outline: none;
 }
 
-span.input-group-addon {
-    margin-top: 20px;
-    vertical-align: center;
+button#signin_btn:active {
+    border: 0px;
+    background-color: #e51c23;
+    color: #FFFFFF;
+    outline: none;
 }
 
-#addon-pic {
-    vertical-align: middle;
-    display: inline;
+button#signin_btn:focus {
+    outline: none;
 }

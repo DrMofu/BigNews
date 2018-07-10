@@ -88,6 +88,7 @@ def login():
 			if user:
 				session['username'] = user.username
 				session['uid'] = user.uid
+				session['utype']=user.type
 				# session.permanent = True
 				return redirect(url_for('index'))
 			else:
@@ -352,6 +353,8 @@ def get_info():
 		g.username = session['username']
 	if session.get('uid'):
 		g.uid = session['uid']	
+	if session.get('utype'):
+		g.utype=session['utype']
 
 # context_processor 对所有渲染文档，统一变量
 @app.context_processor
@@ -360,7 +363,9 @@ def context_pro():
 	# if username:
 	# 	return{'username':username}
 	# return {}
-	if hasattr(g,'username'):
+	if hasattr(g,'username') and hasattr(g,'utype'):
+		return{'username':g.username,'utype':g.utype}
+	elif hasattr(g,'username') :
 		return{'username':g.username}
 	return {}
 
