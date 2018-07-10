@@ -9,12 +9,12 @@
 
 #blur {
     background: inherit;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: -200;
+    z-index: 0;
 }
 
 #clear {
@@ -27,26 +27,21 @@
     filter: brightness(2.0);
     /* 34 */
     position: absolute;
-    top: 20px;
-    left: 300px;
-    z-index: -100;
+    z-index: 1;
 }
 
-#body {
-    background-color: #E0e0e0;
+/* 其他元素 */
+body {
+    overflow:hidden;
+    height: 100%;
 }
-body{
-    /*background-color: #b4daf0;*/
-    /*background-image: url(../images/body_repeat.png);*/
-    /*background-repeat:repeat-x;*/
-    /*background-position: center 0;*/
-    /*background-color: #f7f7f7;*/
-}
+
 div.log-container {
     background-color: #FFFFFF;
     border-radius: 8px;
     padding: 38px 47px 55px 47px;
     margin-top: 5%;
+    margin-bottom:30%;
     z-index: 10;
 }
 

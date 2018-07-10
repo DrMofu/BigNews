@@ -24,8 +24,16 @@
                             </button>
                         </span>
                     </div>
-                    <button class="btn btn-link" style="text-align:right;" type="button">忘记密码?</button>
-                    <br>
+                    <button class="btn btn-link" style="text-align:right;margin-top: 5px;" type="button">忘记密码?</button>
+                    <div class="flash-message" style="margin: 0 auto;position: relative;bottom:-25px;z-index: 100;">
+                        {% with messages=get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert" style="margin: 0 auto;text-align: center;"><p style="text-align: center;">{{message}}</p></div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
                     <button class="btn btn-default btn-block" type="submit">登录</button>
                 </form>
             </div>
@@ -67,6 +75,9 @@
         function mouseMove(ev) {
             ev = ev || window.event;
             var mousePos = mouseCoords(ev);
+            // setTimeout(function(){document.getElementById("clear").style.top = mousePos.y - 900 + "px";},100)
+            // setTimeout(function(){document.getElementById("clear").style.left = mousePos.x - 900 + "px";},100)
+
             document.getElementById("clear").style.top = mousePos.y - 900 + "px";
             document.getElementById("clear").style.left = mousePos.x - 900 + "px";
 
