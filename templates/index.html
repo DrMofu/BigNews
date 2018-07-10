@@ -56,6 +56,7 @@
                                     <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar media__image" alt="">
                                 {% else %}
                                     <img src="static/{{news.picurl}}" class="avatar media__image" alt="">
+<!--                                     <img src="{{news.picurl}}" class="avatar" alt=""> -->
                                 {% endif %}
                                 <div class="media__body">
                                         <h3><span><img class="likes-cover" src="{{url_for('static',filename='images/like.png')}}" alt=""></span><span style="margin-right: 10px;">{{news.likes}}</span><span><img class="comments-cover" src="{{url_for('static',filename='images/comment.png')}}" alt=""></span><span>{{news.comments|length}}</span></h3>

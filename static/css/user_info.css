@@ -1,142 +1,108 @@
-.status-bar{
-    height: 42px;
+.top-link{
+    margin:0 ;
 }
-.logo{
-    height:39px;
-    padding: 0 0 0 2%;
-    float: left
+.logo-picture{
+    height: 35px;
+    padding-left: 3%;
 }
-.picture{
-    height: 40px;
+.button-mainface{
+    height: 33px;
+    background-color: #2e2ec0; 
+    color: aliceblue;
+}
+.user-frame{
+    height: 280px;
+}
+div.background-picture{
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
+    border-radius: 10px;
+}
+.head-picture-frame{
+    /*margin-top: 10%;*/
+}
+.head-picture{
     width: 100px;
-    border: 0;
+    height: 100px;    
 }
-.frame1{
-    padding:0% 0% 0% 5%;
-    float: left;
+.user-name{
+    font-weight: 700;
+    color: azure;
+    font-size: 20px;
 }
-.search{
-    width:200px;
-    float: left;
-    padding: 2px 0 0 30px;
+.user-summary{
+    font-size: 15px;
+    color: antiquewhite;
+}
+.information-box{
+    box-shadow: 2px 2px 2px #888888;
+    padding: 0;
+    border-radius: 10px;
+}
+.dynamic-box{
+    box-shadow: 2px 2px 2px #888888;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid rgb(209, 208, 208);
+
 }
 
-.user{
-    padding: 10% 0 0 0 ;
-}
-.headpicture{
-    padding: 0 0 0 50px;
-    width:170px;
-    float: left;
-}
-.userpicture{
-    width: 100px;
-    height: 100px;
-}
-.username{
-    height: 30px;
-}
-.name{
-    font-weight: 800;
-    font-size: 20px;
-    font-style: italic;
-}
-.usermenu{
-    padding: 30px 0 0 0;
-}
-.usermenu1{
-    background-color: rgb(255, 255, 255);
-    border: 0;
-    color: black;
-    padding: 3px;
-}
-.dynamicmenu{
-    padding:40px 0 0 40px;
-}
-.dynamic{
-    background-color: rgb(255, 255, 255);
-    color: rgb(165, 161, 161);
-    width: 100px;
-    border: 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-.dynamic1{
-    padding: 30px;
-}
-.picturesize{
-    height: 40px;
-    width: 40px;
-    float: left;
-}
-.followname{
+.user-title{
+    background-color: rgb(209, 208, 208);
+    color: #6c5bce;
     font-size: 15px;
-    color: rgb(13, 14, 14);
-    float: left;
-    width: 60px;
+    font-weight: 600;
+    height: 41px;
+    border-radius: 5px;
+    
+}
+.user-name1{
+    height: 100%;
+    font-size: 15px;
+    padding:0 10%;
+    padding-top:10%;
+    word-wrap: break-word;
+    border: 1px solid rgb(209, 208, 208);
+}
+.name-line{
+    border-bottom-style: solid;
+    border-bottom-color: #ccc8c8;
+    border-bottom-width: 1px;
+    margin-bottom: 0;
+}
+.user-done{
+    background-color: rgb(255, 255, 255);
+    border-right: 2px solid rgb(131, 131, 134);
+    height: 420px;
+}
+.user-friend{
+    background-color: rgb(255, 255, 255);
+    height: 420px;
+}
+.button-change{
+    padding: 0;
+}
+.dynamic-frame{
+    margin: 10px;
     padding: 10px;
-    height: 20px;
+    border:1px solid rgb(206, 204, 207);
+    border-radius: 5px;
 }
-.followtime{
-    font-size: 14px;
-    color: rgb(165, 172, 170);
-    padding: 10px; 
-}
-.write{
-    width: 100%;
-    height: 90px;
-}
-.writepicture{
-    height: 80px;
-    width: 80px;
-    float: left;
-    margin: 5px 0 0 20px;
-}
-.writername{
-    padding: 5px 0 0 0;
-    font-size: 20px;
-    font-weight: 700;
-    height: 30px
-}
-.writeintrodution{
-    height: 50px;
-    width: 60%;
-    word-wrap: break-word;
-    float: left;
-}
-.guanzhu{
-    background-color: rgb(201, 199, 195);
-    border: 0;
-    height: 30px;
-    width: 80px;
-    color: rgb(252, 252, 252)
-}
-.titleframe{
-    width: 75%;
-    float: left;
-}
-.title{
+.dynamic-title{
     font-size: 20px;
 }
-.essay{
-    word-wrap: break-word;
-    height: 80px;
+.touxiang{
+    height: 60px;
+    width: 60px;
 }
-.essaypicture{
-    height: 90px;
-    width: 90px;    
-}
-.secondframe{
-    margin: 200px 0 0 0 ;
-}
-.words{
-    font-size: 18px;
-    color: rgb(109, 108, 108);
-}
-.anniu{
-    height: 40px;
+.fengsi-head{
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid rgb(206, 204, 207);
+    border-radius: 5px;
 }
 .picture-size{
-    height: 120px;
-    width: 120px;
+    height: 50px;
+    width: 50px;
 }
