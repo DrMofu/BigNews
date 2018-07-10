@@ -96,7 +96,7 @@ pip install -r requirements.txt
 todo
 - 页面跳转优化
 - 爬虫图片
-
+- js动态特效
 
 
 美化

@@ -39,6 +39,12 @@
     padding: 0px 0px 20px 0px;
     margin: 8px;
 }
+
+.news-content{/*
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis; */
+}
 @media screen and (max-width: 1000px) and (min-width: 700px){
     .headline-card{
         width: 100%;
