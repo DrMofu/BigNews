@@ -18,7 +18,7 @@
 </script>
 {% endblock %}
 {% block main %}
-    <!-- <div class="vacan"></div> -->
+    <div class="vacan"></div>
     <!-- 首页 -->
     <div class="container">
         <div class="one">
@@ -51,14 +51,16 @@
                 <div class="col-md-4 item">
                     <div class="card">
                         <div class="avatar-group">
-                            <a href="{{url_for('newsPage',newsId=news.pid)}}">
+                            <a class="media" href="{{url_for('newsPage',newsId=news.pid)}}">
                                 {% if news.picurl==None %}
-                                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt="">
+                                    <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar media__image" alt="">
                                 {% else %}
-                                    <!-- <img src="static/{{news.picurl}}" class="avatar" alt=""> -->
-                                    <img src="{{news.picurl}}" class="avatar" alt="">
+                                    <img src="static/{{news.picurl}}" class="avatar media__image" alt="">
+<!--                                     <img src="{{news.picurl}}" class="avatar" alt=""> -->
                                 {% endif %}
-                                <!-- <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="avatar" alt=""> -->
+                                <div class="media__body">
+                                        <h3><span><img class="likes-cover" src="{{url_for('static',filename='images/like.png')}}" alt=""></span><span style="margin-right: 10px;">{{news.likes}}</span><span><img class="comments-cover" src="{{url_for('static',filename='images/comment.png')}}" alt=""></span><span>{{news.comments|length}}</span></h3>
+                                </div>
                             </a>
                         </div>
                         <div class="news-group">
