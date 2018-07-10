@@ -27,12 +27,12 @@ class News(db.Model):
 	likes = db.Column(db.Integer,nullable=False,default=0)
 	url = db.Column(db.String(255))
 	picurl = db.Column(db.String(255))
-	waitforcheck = db.Column(db.Integer,nullable=False)            # 0需要审核 1爬虫获取 2管理员审核
+	waitforcheck = db.Column(db.Integer,nullable=False)            # 0需要审核 1爬虫获取 2管理员审核 #如果是爬虫获取 则其picurl是外网链接
 	value = db.Column(db.Integer,nullable=False,default=0)
-
 	author_id = db.Column(db.Integer,db.ForeignKey('user.uid'))
 	author_user = db.relationship('User',backref=db.backref('news'))
 	# 可以使用 Comments(所有留言)，Likes(所有点的赞的id）
+
 
 # 用户留言数据
 class Comments(db.Model):
@@ -52,6 +52,7 @@ class Comments(db.Model):
 	news = db.relationship('News',backref=db.backref('comments',order_by=-time))
 	user = db.relationship('User',backref=db.backref('comments')) 
 	# touser = db.relationship('User',backref=db.backref('becomments')) 
+
 '''
 # 待管理员审核文章
 class WaitNews(db.Model):

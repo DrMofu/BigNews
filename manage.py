@@ -3,7 +3,7 @@
 
 from flask_script import Manager
 from flask_migrate import Migrate,MigrateCommand
-from index import app
+from index import app,create_credit_user
 from exts import db
 from models import *
 # import crawler.run as crawler_news
@@ -39,7 +39,10 @@ def init_user():
 
 @manager.command
 def crawler():
+	crawler_news.delete_database()
+	print('数据库清空')
 	crawler_news.run_crawl()
+	print('数据库获取')
 	return_list = crawler_news.get_toutiao()
 	for item in return_list:
 		print(item['time'])
@@ -56,7 +59,7 @@ def crawler():
 		news.author_id = user.uid
 		db.session.add(news)
 		db.session.commit()
-	crawler_news.delete_database()
+	print('数据导入')
 if __name__ == '__main__':
 	manager.run()
 

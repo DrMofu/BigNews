@@ -10,50 +10,61 @@
 
 {% block main %}
 
-<div class="container">
+<div class="container" style="max-width: 970px; margin-bottom: 30px;">
     <div class="row">
-        <div class="col-xs-12 information-box " style="padding: 0;">
-             <div class="user-frame "> 
-                <div class="background-picture" style="background: url({{url_for('static',filename='images/user_background/1.png')}});">
-                    <div class="col-md-offset-2 col-md-8">
-                        <div class="head-picture-frame">
-                            <center><img src="{{url_for('static',filename='images/users/user_default.png')}}" class="img-thumnnail head-picture img-circle"></center>
-                        </div>
-                        <div class="user-name">
-                            <center>User1</center>
-                        </div>
-                        <div class="user-summary">
-                            <center>他是一个好人,是个大好人</center>
-                        </div>
-                    </div>
+        <div class="col-xs-12">
+            <div class="information-box top_box" style="background: url({{url_for('static',filename='images/user_background/2.jpg')}}); background-repeat: repeat; ">
+                <div>
+                    <img src="{{url_for('static',filename= user.picurl)}}" class="head-picture img-circle">
+
                 </div>
-             </div>
+                <div class="user-name">
+                    <span>{{user.username}}</span>
+                </div>
+                <div class="user-summary">
+                    {% if user.describe%}
+                        <span>{{user.describe}}</span>
+                    {% else %}
+                        <span>这个人很懒，什么都没有写</span>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 3%">
-        <div class="col-xs-12 col-sm-4 col-md-3 information-box">
-            <div class="user-title" >
-                <center>
-                    个人资料
-                </center>
-            </div>
-            <div class="user-information">
-                <div class="user-name1">
+    <div class="row" style="margin-top: 1.5%">        
+        <div class="col-xs-12 col-sm-4">
+            <div class=" information-box user-box box_color">
+                <div class="user-title user-single-title"><span>个人资料<span></div>
+                <div class="user-information">
                     <div class="name-line">
-                        <p style="float: left;margin-bottom: 0;">昵称：</p><p style="margin-bottom: 0;margin-top: 10px;">User1</p>
+                        <p style="float: left;margin-bottom: 0;">昵称：</p>
+                        <p style="margin-bottom: 0;margin-top: 10px;">{{user.username}}</p>
                     </div>
                     <div class="name-line">
-                        <p style="float: left;margin-bottom: 0;">简介：</p><P style="margin-bottom: 0;margin-top: 10px;">他是一个好人，一个特别好的人</P>
+                        <p style="float: left;margin-bottom: 0;">简介：</p>
+                        {% if user.describe == ' ' %}
+                            <p style="margin-bottom: 0;margin-top: 10px;">这个人很懒，什么都没有写</p>
+                        {% else %}
+                            <p style="margin-bottom: 0;margin-top: 10px;">{{user.describe}}</p>
+                        {% endif %}
                     </div>
-                    <div class="name-line">
+<!--                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">性别：</p><P style="margin-bottom: 0;margin-top: 10px;">男</P>
+                    </div> -->                    
+                    <div class="name-line">
+                        <p style="float: left;margin-bottom: 0;">用户等级：</p>
+                        {% if user.type == 1 %}
+                            <P style="margin-bottom: 0;margin-top: 10px;">普通用户</P>
+                        {% elif user.type == 2%}
+                            <P style="margin-bottom: 0;margin-top: 10px;">认证用户</P>
+                        {% else %}
+                            <P style="margin-bottom: 0;margin-top: 10px;">管理员用户</P>
+                        {% endif %}
                     </div>
                     <div class="name-line">
-                        <p style="float: left;margin-bottom: 0;">加入时间：</p><P style="margin-bottom: 0;margin-top: 10px;">2018.7.2</P>
+                        <p style="float: left;margin-bottom: 0;">加入时间：</p><P style="margin-bottom: 0;margin-top: 10px;">{{user.signtime}}</P>
                     </div>
-                    <div class="name-line">
-                        <p style="float: left;margin-bottom: 0;">用户等级：</p><P style="margin-bottom: 0;margin-top: 10px;">普通用户</P>
-                    </div>
+                    <!-- 
                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">所在地：</p><P style="margin-bottom: 0;margin-top: 10px;">湖北 武汉</P>
                     </div>
@@ -62,199 +73,184 @@
                     </div>
                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">学历：</p><P style="margin-bottom: 0;margin-top: 10px;">本科</P>
+                    </div> -->
+                    <div style="margin-top: 10px;">                        
+                        <a href="#" >编辑资料></a>
                     </div>
-                    <a href="#">编辑资料></a>
                 </div>
             </div>
-            <div class="dynamic-box"style="margin-top: 3%">
+
+            <div class="dynamic-box information-box box_color">
                 <div class="user-title">
                     <ul class="nav nav-pills">
-                        <li class="active col-md-5 button-change">
-                            <a href="#关注" data-toggle="tab">关注</a>
+                        <li class="active col-xs-4 button-change" style="display: inline">
+                            <a href="#关注" data-toggle="tab" style="padding: 5px 0px;">关注</a>
                         </li>
-                        <li class="col-md-5 button-change">
-                            <a href="#粉丝" data-toggle="tab">粉丝</a>
+                        <li class="col-xs-4 button-change" style="display: inline">
+                            <a href="#粉丝" data-toggle="tab" style="padding: 5px 0px;">粉丝</a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="关注">
                         <div class="fengsi-head">
-                            <div style="float: left;">
-                            <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumnnail img-circle touxiang">
-                            </div>
-                            <div>
-                                <a href="#" style="font-size: 20px;">User2</a>
-                            </div>
-                            <div>
-                                <p style="color: rgb(179, 182, 181)">生命在于运动</p>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
+                                </div>
+                                <div class="col-xs-8" style="margin-top: 5%">
+                                    <div>
+                                        <a href="#" style="font-size: 16px; font-weight: bold;">User2</a>
+                                    </div>
+                                    <div>
+                                        <p style="color: rgb(179, 182, 181)">生命在于运动</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="粉丝">                       
                         <div class="fengsi-head">
-                            <div style="float: left;">
-                                <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumnnail img-circle touxiang">
-                            </div>
-                            <div>
-                                <a href="#" style="font-size: 20px;">User2</a>
-                            </div>
-                            <div>
-                                <p style="color: rgb(179, 182, 181)">生命在于运动</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="粉丝">
-                        <div class="fengsi-head">
-                            <div style="float: left;">
-                                <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumnnail img-circle touxiang">
-                            </div>
-                            <div>
-                                <a href="#" style="font-size: 20px;">User2</a>
-                            </div>
-                            <div>
-                                <p style="color: rgb(179, 182, 181)">生命在于运动</p>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
+                                </div>
+                                <div class="col-xs-8" style="margin-top: 5%">
+                                    <div>
+                                        <a href="#" style="font-size: 16px; font-weight: bold;">User2</a>
+                                    </div>
+                                    <div>
+                                        <p style="color: rgb(179, 182, 181)">生命在于运动</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>     
-        <div class="col-xs-12 col-sm-8 col-md-9 dynamic-box">
-            <div class="user-title">
-                <ul class="nav nav-pills ">
-                    <li class="active col-md-3 button-change">
-                        <a href="#动态" data-toggle="tab">动态</a>
-                    </li>
-                    <li class="col-md-3 button-change"><a href="#喜欢" data-toggle="tab">喜欢</a></li>
-                    <li class="dropdown col-md-3 button-change">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">文章<b class="caret"></b></a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                            <li><a href="#发布" tabindex="-1" data-toggle="tab">发布成功</a></li>
-                            <li><a href="#待审核" tabindex="-1" data-toggle="tab">待审核</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="动态">
-                    <div class="dynamic-frame">
-                        <div style="float: left">
-                            <img src="C:\Users\chunyu\Pictures\HTML\touxiang.png" class="img-thumnnail img-circle picture-size">
-                        </div>
-                        <div style="float: left">
-                            <a href="#">User2</a>
-                        </div>
-                        <div style="float: left">
-                            <p>评论了你的文章</p>
-                        </div>
-                        <div style="float: left;padding-right: 40px;">
-                            <a href="#">谈“桃花源”</a>
-                        </div>
-                        <div >
-                            <p>2018.7.2 16:56</p>
-                        </div>
-                        <div>
-                            <p>评论：这真的是一篇好文章</p>
-                        </div>
-                    </div>
+            </div> 
+        </div>        
+        <div class="col-xs-12 col-sm-8">
+            <div class="dynamic-box box_color" >
+                <div class="user-title">
+                    <ul class="nav nav-pills ">
+                        <li class="active col-xs-3 button-change">
+                            <a href="#动态" data-toggle="tab" style="padding: 5px 0px;">动态</a>
+                        </li>
+                        <li class="col-xs-3 button-change"><a href="#喜欢" data-toggle="tab" style="padding: 5px 0px;">喜欢</a></li>
+                        <li class="dropdown col-xs-3 button-change">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 5px 0px;">文章<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                                <li><a href="#发布" tabindex="-1" data-toggle="tab">发布成功</a></li>
+                                <li><a href="#待审核" tabindex="-1" data-toggle="tab">待审核</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <div class="tab-pane fade" id="喜欢">
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="动态">
+                        {% for comment in user.comments %}
+                        <div class="dynamic-frame">
+                            <div class="row item-box"> 
+                                <div class="col-xs-4 col-sm-3 col-md-2">
+                                    <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
+                                </div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">                                   
+                                    <p>{{user.username}}评论了文章<a href="{{url_for('newsPage',newsId=comment.newsid)}}">{{comment.news.title}}</a></p>
+                                    <p>{{comment.comment}}</p>                                    
+                                    <span>{{comment.time}}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
+                        <!-- <div class="dynamic-frame">
+                            <div class="row item-box"> 
+                                <div class="col-xs-4 col-sm-3 col-md-2">
+                                    <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
+                                </div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">                                   
+                                    <p><a href="#">User2</a>评论了你的文章<a href="#">谈“桃花源”</a></p>
+                                    <p>评论：这真的是一篇好文章</p>                                    
+                                    <span>2018.7.2 16:56</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        {% endfor %}
+                        {% if user.comments|length == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>不够活跃，还没有动态哦</p>                            
                         </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181);float: left;padding-right: 20px;">>您点赞了这篇文章</p>
-                            <p style="color: rgb(179, 182, 181);">2018.7.2  16:24</p>
-                        </div>
+                        {% endif %}
                     </div>
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
+                    <div class="tab-pane fade" id="喜欢">
+                        {% for like in user.likes %}
+                        <div class="dynamic-frame">
+                            <div class="dynamic-title">
+                                <a href="{{url_for('newsPage',newsId=like.news.pid)}}" style="font-size: 16px">{{like.news.title}}</a>
+                            </div>
+                            <div>
+                                <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                    {{like.news.article}}
+                                </p>
+                            </div>
+                            <div>
+                                <p style="color: rgb(179, 182, 181);padding-right: 20px;">>您点赞了这篇文章</p>
+                                <!-- <p style="color: rgb(179, 182, 181);">2018.7.2  16:24</p> -->
+                            </div>
                         </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
+                        {% endfor %}
+                        {% if user.likes|length == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>暂无点赞记录</p>                            
                         </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181);float: left;padding-right: 20px;">>您点赞了这篇文章</p>
-                            <p style="color: rgb(179, 182, 181);">2018.7.2  16:24</p>
-                        </div>
+                        {% endif %}
                     </div>
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
+                    <div class="tab-pane fade" id="发布">
+                        <!-- 用户已经发布的新闻 -->
+                        {% for news in user.news %}
+                            {% if news.waitforcheck > 0 %}
+                            <div class="dynamic-frame">
+                                <div class="dynamic-title">
+                                    <a href="{{url_for('newsPage',newsId=news.pid)}}" style="font-size: 16px">{{news.title}}</a>
+                                </div>
+                                <div style="word-wrap: break-word">
+                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                        {{news.article}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: rgb(179, 182, 181)">{{news.time}}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news_num == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>还没有发布过文章</p>                            
                         </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
-                        </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181);float: left;padding-right: 20px;">>您点赞了这篇文章</p>
-                            <p style="color: rgb(179, 182, 181);">2018.7.2  16:24</p>
-                        </div>
+                        {% endif %}
                     </div>
-                </div>
-                <div class="tab-pane fade" id="发布">
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
+                    <div class="tab-pane fade" id="待审核">
+                        {% for news in user.news %}
+                            {% if news.waitforcheck == 0 %}
+                            <div class="dynamic-frame">
+                                <div class="dynamic-title">
+                                    <a href="{{url_for('newsPage',newsId=news.pid)}}" style="font-size: 16px">{{news.title}}</a>
+                                </div>
+                                <div style="word-wrap: break-word">
+                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                        {{news.article}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: rgb(179, 182, 181)">{{news.time}}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news_num_wait == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>还没有文章待审核</p>                            
                         </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
-                        </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                        </div>
-                    </div>
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
-                        </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
-                        </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="待审核">
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
-                        </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
-                        </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                        </div>
-                    </div>
-                    <div class="dynamic-frame">
-                        <div class="dynamic-title">
-                            <a href="#">谈“桃花源”</a>
-                        </div>
-                        <div style="word-wrap: break-word">
-                            <p>
-                                菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                            </p>
-                        </div>
-                        <div>
-                            <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -1,33 +1,25 @@
-.top-link{
-    margin:0 ;
+.information-box{
+    box-shadow: 2px 2px 5px #dddddd;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    z-index: 999;
 }
-.logo-picture{
-    height: 35px;
-    padding-left: 3%;
+.box_color{
+    background-color: #ffffff;
 }
-.button-mainface{
-    height: 33px;
-    background-color: #2e2ec0; 
-    color: aliceblue;
+
+.top_box{    
+    padding: 5% 0%;
+    margin-top: 2%;
+    text-align: center;
 }
-.user-frame{
-    height: 280px;
-}
-div.background-picture{
-    width: 100%;
-    height: 100%;
-    padding-top: 5%;
-    border-radius: 10px;
-}
-.head-picture-frame{
-    /*margin-top: 10%;*/
-}
+
 .head-picture{
     width: 100px;
     height: 100px;    
 }
 .user-name{
-    font-weight: 700;
+    /*font-weight: 700;*/
     color: azure;
     font-size: 20px;
 }
@@ -35,35 +27,34 @@ div.background-picture{
     font-size: 15px;
     color: antiquewhite;
 }
-.information-box{
-    box-shadow: 2px 2px 2px #888888;
-    padding: 0;
-    border-radius: 10px;
-}
-.dynamic-box{
-    box-shadow: 2px 2px 2px #888888;
-    padding: 0;
-    border-radius: 5px;
-    border: 1px solid rgb(209, 208, 208);
 
+.dynamic-box{
+    box-shadow: 2px 2px 5px #dddddd;
+    padding: 0;
+    border-radius: 2px;
+    border: 1px solid #cccccc;
+    margin-bottom: 4%;
+
+}
+.user-box{
+    margin-bottom: 4%
+}
+.user-single-title{    
+    line-height: 30px;
 }
 
 .user-title{
-    background-color: rgb(209, 208, 208);
-    color: #6c5bce;
-    font-size: 15px;
-    font-weight: 600;
-    height: 41px;
-    border-radius: 5px;
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #337ab7;
+    font-size: 16px;
+    font-weight: bold;
     
 }
-.user-name1{
-    height: 100%;
-    font-size: 15px;
-    padding:0 10%;
-    padding-top:10%;
+.user-information{
+    font-size: 14px;
+    padding: 5% 10%;
     word-wrap: break-word;
-    border: 1px solid rgb(209, 208, 208);
 }
 .name-line{
     border-bottom-style: solid;
@@ -81,28 +72,26 @@ div.background-picture{
     height: 420px;
 }
 .button-change{
-    padding: 0;
+    padding: 0;/*
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;*/
 }
 .dynamic-frame{
     margin: 10px;
     padding: 10px;
     border:1px solid rgb(206, 204, 207);
-    border-radius: 5px;
+    border-radius: 2px;
 }
 .dynamic-title{
     font-size: 20px;
 }
-.touxiang{
-    height: 60px;
-    width: 60px;
-}
 .fengsi-head{
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid rgb(206, 204, 207);
-    border-radius: 5px;
+    margin: 2% 0%;
+    padding: 2% 4%;
+/*    border: 1px solid rgb(206, 204, 207);
+    border-radius: 2px;*/
 }
-.picture-size{
-    height: 50px;
-    width: 50px;
+
+.item-box{
+    padding: 2%;
 }
