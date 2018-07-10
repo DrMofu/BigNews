@@ -6,7 +6,7 @@ from flask_migrate import Migrate,MigrateCommand
 from index import app,create_credit_user
 from exts import db
 from models import *
-import crawler.run as crawler_news
+# import crawler.run as crawler_news
 
 manager = Manager(app)
 

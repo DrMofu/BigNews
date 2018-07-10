@@ -49,6 +49,7 @@ def index():
 		if len(item.article)>100:
 			item.article=item.article[:100]+'...'
 			item.article = item.article.replace('</br>','').replace('　','').replace('<br/>','')
+
 	return render_template('index.html',**content)
 
 # 分类页面
@@ -209,10 +210,12 @@ def release():
 		type = request.form.get('type')
 
 		pic=request.files['pic']
-		basepath=os.path.abspath(os.path.dirname(__file__))
-		upload_path=os.path.join(basepath,'static/images/news',secure_filename(pic.filename))
-		pic.save(upload_path)
-		picurl=os.path.join('images/news',secure_filename(pic.filename))
+		picurl=None
+		if pic:
+			basepath=os.path.abspath(os.path.dirname(__file__))
+			upload_path=os.path.join(basepath,'static/images/news',secure_filename(pic.filename))
+			pic.save(upload_path)
+			picurl=os.path.join('images/news',secure_filename(pic.filename))
 
 		user = User.query.filter(User.username == g.username).first()
 		news = News(title=title,article=content,type=type,source='用户发布',picurl=picurl,author=g.username,waitforcheck=0)
