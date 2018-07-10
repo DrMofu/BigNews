@@ -1,26 +1,30 @@
 from twisted.internet import reactor, defer
 from scrapy.utils.project import get_project_settings
 from scrapy.crawler import CrawlerRunner
+from scrapy.utils.log import configure_logging
 import sqlite3
-from jinritoutiao import spiders
+from .jinritoutiao.spiders import sina_hb, sina_mil, sina_travel, sina_sports, sina_finance
 
 
 @defer.inlineCallbacks
 def crawl():
-    runner = CrawlerRunner(get_project_settings())
-    yield runner.crawl(spiders.sina_hb.SinaHBSpider)
-    yield runner.crawl(spiders.sina_mil.SinaMILSpider)
-    yield runner.crawl(spiders.sina_travel.SinaTravelSpider)
-    yield runner.crawl(spiders.sina_sports.SinaSportsSpider)
-    yield runner.crawl(spiders.sina_finance.SinaFinanceSpider)
+    runner = CrawlerRunner({
+        'ITEM_PIPELINES': {'crawler.jinritoutiao.pipelines.JinritoutiaoPipeline': 300}
+    })
+    yield runner.crawl(sina_hb.SinaHBSpider)
+    yield runner.crawl(sina_mil.SinaMILSpider)
+    yield runner.crawl(sina_travel.SinaTravelSpider)
+    yield runner.crawl(sina_sports.SinaSportsSpider)
+    yield runner.crawl(sina_finance.SinaFinanceSpider)
 
     reactor.stop()
     
 def run_crawl():
+    configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
     crawl()
     reactor.run()
 
-url = 'toutiao.sqlite'
+url = 'crawler/toutiao.sqlite'
 
 def get_toutiao():
     # conn = sqlite3.connect('crawler/toutiao.sqlite')

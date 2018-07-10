@@ -33,7 +33,7 @@
     </div>
     <div class="row" style="margin-top: 1.5%">        
         <div class="col-xs-12 col-sm-4">
-            <div class=" information-box user-box">
+            <div class=" information-box user-box box_color">
                 <div class="user-title user-single-title"><span>个人资料<span></div>
                 <div class="user-information">
                     <div class="name-line">
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="dynamic-box information-box">
+            <div class="dynamic-box information-box box_color">
                 <div class="user-title">
                     <ul class="nav nav-pills">
                         <li class="active col-xs-4 button-change" style="display: inline">
@@ -129,7 +129,7 @@
             </div> 
         </div>        
         <div class="col-xs-12 col-sm-8">
-            <div class="dynamic-box">
+            <div class="dynamic-box box_color" >
                 <div class="user-title">
                     <ul class="nav nav-pills ">
                         <li class="active col-xs-3 button-change">
@@ -164,7 +164,7 @@
                         {% for like in user.likes %}
                         <div class="dynamic-frame">
                             <div class="dynamic-title">
-                                <a href="#" style="font-size: 16px">{{like.news.title}}</a>
+                                <a href="{{url_for('newsPage',newsId=like.news.pid)}}" style="font-size: 16px">{{like.news.title}}</a>
                             </div>
                             <div>
                                 <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
@@ -178,38 +178,59 @@
                         </div>
                         {% endfor %}
                         {% if user.likes|length == 0 %}
-                        <p>暂无点赞记录</p>
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>暂无点赞记录,快去点赞文章吧</p>                            
+                        </div>
                         {% endif %}
                     </div>
                     <div class="tab-pane fade" id="发布">
-                        <div class="dynamic-frame">
-                            <div class="dynamic-title">
-                                <a href="#" style="font-size: 16px">谈“桃花源”</a>
+                        <!-- 用户已经发布的新闻 -->
+                        {% for news in user.news %}
+                            {% if news.waitforcheck > 0 %}
+                            <div class="dynamic-frame">
+                                <div class="dynamic-title">
+                                    <a href="{{url_for('newsPage',newsId=news.pid)}}" style="font-size: 16px">{{news.title}}</a>
+                                </div>
+                                <div style="word-wrap: break-word">
+                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                        {{news.article}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: rgb(179, 182, 181)">{{news.time}}</p>
+                                </div>
                             </div>
-                            <div style="word-wrap: break-word">
-                                <p>
-                                    菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                                </p>
-                            </div>
-                            <div>
-                                <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news_num == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>你还没有发布过文章哦</p>                            
                         </div>
+                        {% endif %}
                     </div>
                     <div class="tab-pane fade" id="待审核">
-                        <div class="dynamic-frame">
-                            <div class="dynamic-title">
-                                <a href="#" style="font-size: 16px">谈“桃花源”</a>
+                        {% for news in user.news %}
+                            {% if news.waitforcheck == 0 %}
+                            <div class="dynamic-frame">
+                                <div class="dynamic-title">
+                                    <a href="{{url_for('newsPage',newsId=news.pid)}}" style="font-size: 16px">{{news.title}}</a>
+                                </div>
+                                <div style="word-wrap: break-word">
+                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                        {{news.article}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: rgb(179, 182, 181)">{{news.time}}</p>
+                                </div>
                             </div>
-                            <div style="word-wrap: break-word">
-                                <p>
-                                    菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档
-                                </p>
-                            </div>
-                            <div>
-                                <p style="color: rgb(179, 182, 181)">2018.7.3  18:23</p>
-                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news_num_wait == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>你还没有文章待审核哦</p>                            
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

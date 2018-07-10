@@ -11,15 +11,15 @@
 
 BOT_NAME = 'jinritoutiao'
 
-SPIDER_MODULES = ['jinritoutiao.spiders']
-NEWSPIDER_MODULE = 'jinritoutiao.spiders'
+SPIDER_MODULES = ['crawler.jinritoutiao.spiders']
+NEWSPIDER_MODULE = 'crawler.jinritoutiao.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'jinritoutiao (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'jinritoutiao.pipelines.JinritoutiaoPipeline': 300,
+    'crawler.jinritoutiao.pipelines.JinritoutiaoPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -34,6 +34,7 @@ class News(db.Model):
 	author_user = db.relationship('User',backref=db.backref('news'))
 	# 可以使用 Comments(所有留言)，Likes(所有点的赞的id）
 
+
 # 用户留言数据
 class Comments(db.Model):
 	__tablename__ = 'comments'

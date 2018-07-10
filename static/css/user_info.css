@@ -2,6 +2,10 @@
     box-shadow: 2px 2px 5px #dddddd;
     border: 1px solid #cccccc;
     border-radius: 2px;
+    z-index: 999;
+}
+.box_color{
+    background-color: #ffffff;
 }
 
 .top_box{    

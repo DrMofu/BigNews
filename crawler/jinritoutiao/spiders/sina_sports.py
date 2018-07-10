@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from datetime import datetime
 
 class SinaSportsSpider(scrapy.Spider):
     name = 'sina_sports'
@@ -17,6 +17,8 @@ class SinaSportsSpider(scrapy.Spider):
         time = response.css('.date ::text').extract_first()
         time = " ".join(time.split())
         time = time + ':00'
+        time = datetime.strptime(time, '%Y年%m月%d日 %H:%M:%S')
+        time = time.strftime("%Y-%m-%d %H:%M:%S")
         
         media = response.css('.source ::text').extract_first()
         img = None

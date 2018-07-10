@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from datetime import datetime
 
 
 class SinaTravelSpider(scrapy.Spider):
@@ -17,6 +18,8 @@ class SinaTravelSpider(scrapy.Spider):
         time = response.css('.time-source ::text').extract_first().strip()
         time = " ".join(time.split())
         time = time + ':00'
+        time = datetime.strptime(time, '%Y年%m月%d日 %H:%M:%S')
+        time = time.strftime("%Y-%m-%d %H:%M:%S")
         
         media = response.css('.time-source span ::text').extract_first()
         img = None
@@ -24,10 +27,10 @@ class SinaTravelSpider(scrapy.Spider):
             img = response.css('.article img::attr(src)').extract_first()
         if article and time and media:
             yield{
-                    'title': ''.join(response.css('h1.main-title::text').extract()),
+                    'title': ''.join(response.css('h1 ::text').extract()),
                     'article': article,
                     'time':  time,
-                    'type': '财经',
+                    'type': '旅游',
                     'source': media,
                     'author': media,
                     'url': response.url,

@@ -68,7 +68,7 @@
         </div>
         <!--正文信息-->
         <div class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-0 col-md-8" id="text_box">
-            <p>{{ news.article }}</p>
+            {{ news.article | safe }}
         </div>
         <!--手机界面下发布者信息-->
         <div class="col-xs-8 col-xs-offset-2 visible-xs" id="author_box_xs">

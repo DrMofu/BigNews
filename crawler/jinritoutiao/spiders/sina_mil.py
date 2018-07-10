@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from datetime import datetime
 
 class SinaMILSpider(scrapy.Spider):
     name = 'sina_mil'
@@ -12,10 +12,13 @@ class SinaMILSpider(scrapy.Spider):
             yield scrapy.Request(url, callback = self.parse_article)
 
     def parse_article(self, response):
-        article = '\n'.join(response.css('.article p ::text').extract())
+        article = '</br>'.join(response.css('.article p ::text').extract()).strip()
         time = response.css('.date ::text').extract_first()
         time = " ".join(time.split())
         time = time + ':00'
+        time = datetime.strptime(time, '%Y年%m月%d日 %H:%M:%S')
+        time = time.strftime("%Y-%m-%d %H:%M:%S")
+    
         media = response.css('.source ::text').extract_first()
         img = None
         if response.css('.article img::attr(src)').extract_first():

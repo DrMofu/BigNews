@@ -47,6 +47,7 @@ def index():
 	for item in content['newss']:
 		if len(item.article)>100:
 			item.article=item.article[:100]+'...'
+			item.article = item.article.replace('</br>','').replace('　','').replace('<br/>','')
 	return render_template('main.html',**content)
 
 @app.route('/catalogue')
@@ -57,6 +58,7 @@ def catalogue():
 	for item in content['newss']:
 		if len(item.article)>100:
 			item.article=item.article[:100]+'...'
+			item.article = item.article.replace('</br>','').replace('　','').replace('<br/>','')
 	return render_template('index.html',**content)
 
 # user模块
@@ -138,7 +140,22 @@ def logout():
 @login_required
 def user():
 	user = User.query.filter(User.username==g.username).first()
-	return render_template('/user/info.html',user=user)
+	news_num = 0
+	news_num_wait = 0
+	for news in user.news:
+		if news.waitforcheck>0:
+			news_num += 1
+		elif news.waitforcheck == 0:
+			news_num_wait += 1
+	for like in user.likes:
+		like.news.article = like.news.article.replace('</br>','').replace('　','').replace('<br/>','')
+	inputDict = {
+		'user':user,
+		'news_num':news_num,
+		'news_num_wait':news_num_wait
+	}
+
+	return render_template('/user/info.html',**inputDict)
 
 # user_info 他人信息页
 @app.route('/user/<username>')
@@ -189,6 +206,7 @@ def newsPage(newsId):
 	likes = None
 	if hasattr(g,'uid'):
 		likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
+
 	return render_template('news.html',news=news,likes=likes)
 
 
