@@ -42,18 +42,15 @@
                     </div>
                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">简介：</p>
-                        {% if user.describe%}
-                            <P style="margin-bottom: 0;margin-top: 10px;">{{user.describe}}</P>
+                        {% if user.describe == ' ' %}
+                            <p style="margin-bottom: 0;margin-top: 10px;">这个人很懒，什么都没有写</p>
                         {% else %}
-                            <P style="margin-bottom: 0;margin-top: 10px;">这个人很懒，什么都没有写</P>
+                            <p style="margin-bottom: 0;margin-top: 10px;">{{user.describe}}</p>
                         {% endif %}
                     </div>
-                    <div class="name-line">
+<!--                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">性别：</p><P style="margin-bottom: 0;margin-top: 10px;">男</P>
-                    </div>
-                    <div class="name-line">
-                        <p style="float: left;margin-bottom: 0;">加入时间：</p><P style="margin-bottom: 0;margin-top: 10px;">{{user.signtime}}</P>
-                    </div>
+                    </div> -->                    
                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">用户等级：</p>
                         {% if user.type == 1 %}
@@ -63,7 +60,11 @@
                         {% else %}
                             <P style="margin-bottom: 0;margin-top: 10px;">管理员用户</P>
                         {% endif %}
-                    </div><!-- 
+                    </div>
+                    <div class="name-line">
+                        <p style="float: left;margin-bottom: 0;">加入时间：</p><P style="margin-bottom: 0;margin-top: 10px;">{{user.signtime}}</P>
+                    </div>
+                    <!-- 
                     <div class="name-line">
                         <p style="float: left;margin-bottom: 0;">所在地：</p><P style="margin-bottom: 0;margin-top: 10px;">湖北 武汉</P>
                     </div>
@@ -147,7 +148,20 @@
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="动态">
+                        {% for comment in user.comments %}
                         <div class="dynamic-frame">
+                            <div class="row item-box"> 
+                                <div class="col-xs-4 col-sm-3 col-md-2">
+                                    <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
+                                </div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">                                   
+                                    <p>{{user.username}}评论了文章<a href="{{url_for('newsPage',newsId=comment.newsid)}}">{{comment.news.title}}</a></p>
+                                    <p>{{comment.comment}}</p>                                    
+                                    <span>{{comment.time}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="dynamic-frame">
                             <div class="row item-box"> 
                                 <div class="col-xs-4 col-sm-3 col-md-2">
                                     <img src="{{url_for('static',filename= user.picurl)}}" class="img-circle img-responsive">
@@ -158,7 +172,13 @@
                                     <span>2018.7.2 16:56</span>
                                 </div>
                             </div>
+                        </div> -->
+                        {% endfor %}
+                        {% if user.comments|length == 0 %}
+                        <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
+                            <p>不够活跃，还没有动态哦</p>                            
                         </div>
+                        {% endif %}
                     </div>
                     <div class="tab-pane fade" id="喜欢">
                         {% for like in user.likes %}
@@ -179,7 +199,7 @@
                         {% endfor %}
                         {% if user.likes|length == 0 %}
                         <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
-                            <p>暂无点赞记录,快去点赞文章吧</p>                            
+                            <p>暂无点赞记录</p>                            
                         </div>
                         {% endif %}
                     </div>
@@ -204,7 +224,7 @@
                         {% endfor %}
                         {% if news_num == 0 %}
                         <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
-                            <p>你还没有发布过文章哦</p>                            
+                            <p>还没有发布过文章</p>                            
                         </div>
                         {% endif %}
                     </div>
@@ -228,7 +248,7 @@
                         {% endfor %}
                         {% if news_num_wait == 0 %}
                         <div style="text-align: center;margin: 8% 0%;font-size: 16px;font-weight: bold;">
-                            <p>你还没有文章待审核哦</p>                            
+                            <p>还没有文章待审核</p>                            
                         </div>
                         {% endif %}
                     </div>

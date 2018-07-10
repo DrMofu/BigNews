@@ -9,6 +9,11 @@
     <link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <link href="{{ url_for('static',filename='css/base.css')}}" rel="stylesheet">    
+
+    <style type="text/css">
+        a:hover {text-decoration: none;}
+        a:active {text-decoration: none;}
+    </style>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -30,12 +35,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
                 <ul id="table-left" class="nav navbar-nav">
                     <li><a href="{{url_for('index')}}">精选<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">时政<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">军事<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">生活<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">社会<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">体育<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{url_for('catalogue')}}">娱乐<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='大湖北')}}">本地<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='科技')}}">科技<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='财经')}}">财经<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='体育')}}">体育<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='旅游')}}">旅游<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{url_for('catalogue', kind='军事')}}">军事<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{url_for('release')}}">编辑新闻</a></li>
                     <li class="underline"></li>
                 </ul>

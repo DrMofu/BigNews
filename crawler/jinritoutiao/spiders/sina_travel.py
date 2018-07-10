@@ -13,12 +13,12 @@ class SinaTravelSpider(scrapy.Spider):
             yield scrapy.Request(url, callback = self.parse_article)
 
     def parse_article(self, response):
-        article = '<br/>'.join(response.css('.article>p ::text').extract()).strip()
+        article = '<br/>'.join(response.css('.article>p ::text').extract())
         
         time = response.css('.time-source ::text').extract_first().strip()
         time = " ".join(time.split())
         time = time + ':00'
-        time = datetime.strptime(time, '%Y年%m月%d日 %H:%M:%S')
+        time = datetime.strptime(time, '%Y年%m月%d日%H:%M:%S')
         time = time.strftime("%Y-%m-%d %H:%M:%S")
         
         media = response.css('.time-source span ::text').extract_first()

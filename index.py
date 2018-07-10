@@ -39,6 +39,7 @@ def validateRegister(username,password1,password2):
 def test():
 	return render_template('test.html')
 
+# 主页面
 @app.route('/')
 def index():
 	content = {
@@ -48,18 +49,19 @@ def index():
 		if len(item.article)>100:
 			item.article=item.article[:100]+'...'
 			item.article = item.article.replace('</br>','').replace('　','').replace('<br/>','')
-	return render_template('main.html',**content)
+	return render_template('index.html',**content)
 
-@app.route('/catalogue')
-def catalogue():
+# 分类页面
+@app.route('/catalogue/<kind>')
+def catalogue(kind):
 	content = {
-		'newss' : News.query.filter(News.waitforcheck > 0).order_by('-time').limit(20).all()
+		'newss' : News.query.filter(News.waitforcheck > 0, News.type == kind).order_by('-time').limit(20).all()
 	}
 	for item in content['newss']:
 		if len(item.article)>100:
 			item.article=item.article[:100]+'...'
 			item.article = item.article.replace('</br>','').replace('　','').replace('<br/>','')
-	return render_template('index.html',**content)
+	return render_template('catalogue.html',**content)
 
 # user模块
 '''
@@ -149,6 +151,8 @@ def user():
 			news_num_wait += 1
 	for like in user.likes:
 		like.news.article = like.news.article.replace('</br>','').replace('　','').replace('<br/>','')
+	for news in user.news:
+	 	news.article = news.article.replace('</br>','').replace('　','').replace('<br/>','')
 	inputDict = {
 		'user':user,
 		'news_num':news_num,
@@ -160,7 +164,29 @@ def user():
 # user_info 他人信息页
 @app.route('/user/<username>')
 def user_info(username):
-	return username
+	user = User.query.filter(User.username==username).first()
+	if user:
+		news_num = 0
+		news_num_wait = 0
+		for news in user.news:
+			if news.waitforcheck>0:
+				news_num += 1
+			elif news.waitforcheck == 0:
+				news_num_wait += 1
+		for like in user.likes:
+			like.news.article = like.news.article.replace('</br>','').replace('　','').replace('<br/>','')
+		for news in user.news:
+	 		news.article = news.article.replace('</br>','').replace('　','').replace('<br/>','')
+		inputDict = {
+			'user':user,
+			'news_num':news_num,
+			'news_num_wait':news_num_wait
+		}
+
+		return render_template('/user/info.html',**inputDict)
+	else:
+		return render_template('404.html')
+
 
 # 新闻模块
 '''
@@ -203,12 +229,14 @@ def release():
 @app.route('/news/<newsId>')
 def newsPage(newsId):
 	news = News.query.filter(News.pid == newsId).first()
-	likes = None
-	if hasattr(g,'uid'):
-		likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
+	if news:
+		likes = None
+		if hasattr(g,'uid'):
+			likes = Likes.query.filter(Likes.pid==news.pid,Likes.uid==g.uid).first()
 
-	return render_template('news.html',news=news,likes=likes)
-
+		return render_template('news.html',news=news,likes=likes)
+	else:
+		return render_template('404.html')
 
 # news_confirm 新闻审核
 @app.route('/confirm/')
@@ -347,7 +375,9 @@ def create_credit_user(username, type=2, password='123456', describe='认证用�
 	db.session.commit()
 	return user
 
-
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html'),404
 
 if __name__ == '__main__':
 	app.run()
