@@ -29,12 +29,19 @@
         }
         window.onload = init;
     </script>
+    <script>
+        function init() {
+            var innerHeight = window.innerHeight;
+            document.getElementById("alert_info_card").style.height = innerHeight * 0.5 + "px";
+            document.getElementById("alert_info_card").style.marginTop = innerHeight * 0.1 + "px";
+        }
+        window.onload = init;
+    </script>
 {% endblock %}
 {% block main %}
 <div style="background-color: #f5f5f5">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{url_for('test')}}"><img class="logo" src="{{url_for('static',filename='images/logo.png')}}"></a>
             </div>
@@ -46,7 +53,7 @@
                 <a href="{{url_for('logout')}}"  class="right">注销</a>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <div class="container-fluid">
         <div id="outer_row" class="row">
             <div id="card-list" class="col-md-4">
@@ -96,6 +103,13 @@
                     <h4 id="detail_title">{{newss[0].title}}</h4>
                     <p id="detail_info">{{newss[0].author}} {{newss[0].time}} {{newss[0].type}}</p>
                     <p>{{newss[0].article}}</p>
+                    <div style="width: 100%;text-align: center;">
+                        {% if newss[0].picurl==None %}
+                            <img src="{{url_for('static',filename='images/newsimg.jpg')}}" class="confirm-img" alt="">
+                        {% else %}
+                            <img src="../static/{{newss[0].picurl}}" class="confirm-img" alt="">
+                        {% endif %}
+                    </div>
                 </div>
                 <form action="{{url_for('confirm_upgrade')}}" method="POST">
                     <input type="hidden" name="news_id" value="{{newss[0].pid}}">
@@ -108,7 +122,16 @@
     </div>
     {% if news_lenth==0 %}
 
-    <p>暂无需要审核页面</p>
+    <div class="container-fluid">
+        <!-- 当没有新闻需要审核的时候,使用这个.row -->
+        <div class="row">
+
+            <div id="alert_info_card" class="col-md-6 col-md-offset-3 ">
+                <h3 id="alert_info">暂无新闻需要审核</h3>
+            </div>
+
+        </div>
+    </div>
 
     {% endif %}
 </div>

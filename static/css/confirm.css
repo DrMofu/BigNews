@@ -1,4 +1,4 @@
-/*导航栏*/
+/* 导航栏
 
 .navbar-default {
     height: 80px;
@@ -7,7 +7,6 @@
 .container {
     height: 100%
 }
-
 #nav-text {
     border-left: 1px solid #E0E0E0;
     padding-left: 24px;
@@ -30,13 +29,13 @@
     margin-left: 24px;
     font-size: 20px;
     color: #757575;
-}
+} */
 
 
 /*左边*/
 
 #outer_row {
-    margin-top: 80px;
+    margin-top: 20px;
     padding: 0px 32px;
 }
 
@@ -108,6 +107,10 @@
     margin: 0px 0px 24px 0px;
 }
 
+.confirm-img{
+    width: 65%;
+}
+
 #pass {
     float: right;
     margin-top: 24px;
@@ -132,4 +135,16 @@
     border-radius: 4px;
     font-size: 18px;
     line-height: 1;
+}
+
+#alert_info_card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+#alert_info {
+    text-align: center;
+    margin-top: 4em;
+    color: #757575;
 }
